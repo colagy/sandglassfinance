@@ -1,0 +1,1 @@
+{  "name": "沙漏记账api",  "version": "1.0.0",  "description": "沙漏记账api文档",  "title": "沙漏记账api文档",  "url": "http://sandglass.js.cn/api/v1",  "sampleUrl": false,  "defaultVersion": "0.0.0",  "apidoc": "0.3.0",  "generator": {    "name": "apidoc",    "time": "2018-11-24T14:15:44.169Z",    "url": "http://apidocjs.com",    "version": "0.17.6"  }}

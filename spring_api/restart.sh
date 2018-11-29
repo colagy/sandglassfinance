@@ -1,0 +1,2 @@
+docker stop sandglassfinance_spring_api_1
+docker start sandglassfinance_spring_api_1

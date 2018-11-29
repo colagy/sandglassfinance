@@ -1,0 +1,6 @@
+server:
+  port: 17073
+  ssl:
+    key-store: classpath:sandglass.js.cn.pfx
+    key-store-password: 214938487690629
+    keyStoreType: PKCS12

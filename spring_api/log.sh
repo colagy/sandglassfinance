@@ -1,0 +1,1 @@
+docker logs -f --tail=10 sandglassfinance_spring_api_${1:-1}

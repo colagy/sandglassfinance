@@ -1,0 +1,1 @@
+docker exec -it sandglassfinance_mysql_${1:-1} /bin/sh -c 'mysql -h 127.0.0.1 -uroot -psandglassfinance_MySql_password+- sandglassfinance'

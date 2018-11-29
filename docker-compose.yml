@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  mysql:
+    image: mysql:5.7
+    container_name: sandglassfinance_mysql_1
+    ports:
+      - "13304:3306"
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: sandglassfinance_MySql_password+-
+      MYSQL_DATABASE: sandglassfinance
+      LANG: C.UTF-8
+    volumes:
+      - /data/db/sandglassfinance_mysql:/var/lib/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/sql:/sql
+    restart: always
+
+  spring_api:
+    image: maven:3.5-jdk-11
+    container_name: sandglassfinance_spring_api_1
+    working_dir: /spring_api

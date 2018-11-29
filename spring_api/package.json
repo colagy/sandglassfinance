@@ -1,0 +1,14 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "scripts": {
+    "doc": "apidoc -f '.*\\.java$' -i src/main/java/cn/js/it/sandglassfinance/controller/ -o apidoc/"
+  },
+  "author": "",
+  "license": "MIT"
+}

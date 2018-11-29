@@ -1,0 +1,1 @@
+docker kill sandglassfinance_spring_api_1

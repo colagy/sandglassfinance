@@ -1,0 +1,1 @@
+docker exec -it sandglassfinance_spring_api_${1:-1} /bin/sh
