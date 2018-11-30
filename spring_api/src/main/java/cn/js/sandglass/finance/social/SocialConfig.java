@@ -16,14 +16,6 @@ import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
-/**
- * 社交登录配置主类
- * Created on 2018/1/8 0008.
- *
- * @author zlf
- * @email i@merryyou.cn
- * @since 1.0
- */
 @Configuration
 @EnableSocial
 @Order(1)

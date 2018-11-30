@@ -1,5 +1,9 @@
 package cn.js.sandglass.finance.social.weixin.connect;
 
+import cn.js.sandglass.finance.social.weixin.api.Weixin;
+import cn.js.sandglass.finance.social.weixin.api.impl.WeiXinImpl;
+import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
+
 public class WeixinServiceProvider extends AbstractOAuth2ServiceProvider<Weixin> {
 
     /**
