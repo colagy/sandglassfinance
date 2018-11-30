@@ -3,6 +3,7 @@ package cn.js.sandglass.finance;
 import cn.js.sandglass.finance.configuration.SpringConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Import;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +11,7 @@ import java.util.TimeZone;
 
 @SpringBootApplication
 @Import(SpringConfiguration.class)
-
+@EnableCaching
 public class FinanceApplication {
 
     @PostConstruct
