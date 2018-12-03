@@ -1,5 +1,6 @@
 package cn.js.sandglass.finance.social;
 
+import cn.js.sandglass.finance.property.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +36,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Bean
     public SpringSocialConfigurer merryyouSocialSecurityConfig() {
         String filterProcessesUrl = SecurityConstants.DEFAULT_SOCIAL_PROCESS_URL;
-        MerryyouSpringSocialConfigurer configurer = new MerryyouSpringSocialConfigurer(filterProcessesUrl);
+        MySpringSocialConfigurer configurer = new MySpringSocialConfigurer(filterProcessesUrl);
         return configurer;
     }
 

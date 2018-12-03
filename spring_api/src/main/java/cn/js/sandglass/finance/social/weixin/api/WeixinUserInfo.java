@@ -7,6 +7,10 @@ public class WeixinUserInfo {
     /**
      * 普通用户的标识，对当前开发者帐号唯一
      */
+    private String unionid;
+    /**
+     * 普通用户的标识，对当前开发者帐号唯一
+     */
     private String openid;
     /**
      * 普通用户昵称
