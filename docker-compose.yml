@@ -17,7 +17,19 @@ services:
       - ./mysql/conf.d:/etc/mysql/conf.d
       - ./mysql/sql:/sql
     restart: always
-
+  
+  redis:
+    image: redis:3
+    container_name: sandglassfinance_redis_1
+    ports:
+      - "16379:6379"
+    expose:
+      - "6379"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - /tmp/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf --requirepass sandglassfinance_Redis_password+-
+    
   spring_api:
     image: maven:3.5-jdk-11
     container_name: sandglassfinance_spring_api_1
