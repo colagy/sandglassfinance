@@ -1,0 +1,1 @@
+docker exec -it sandglassfinance_redis_${1:-1} /bin/sh -c 'redis-cli -h 127.0.0.1 -p 6379 -a sandglassfinance_Redis_password+-'
