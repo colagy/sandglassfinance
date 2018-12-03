@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -38,6 +41,20 @@ public class SocialConfig extends SocialConfigurerAdapter {
         String filterProcessesUrl = SecurityConstants.DEFAULT_SOCIAL_PROCESS_URL;
         MySpringSocialConfigurer configurer = new MySpringSocialConfigurer(filterProcessesUrl);
         return configurer;
+    }
+
+    @Override
+    public UserIdSource getUserIdSource() {
+        return new UserIdSource() {
+            @Override
+            public String getUserId() {
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                if (authentication == null) {
+                    throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
+                }
+                return authentication.getName();
+            }
+        };
     }
 
     @Override

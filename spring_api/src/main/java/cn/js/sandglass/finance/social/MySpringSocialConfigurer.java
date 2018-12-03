@@ -19,4 +19,6 @@ public class MySpringSocialConfigurer extends SpringSocialConfigurer {
         filter.setSignupUrl("/socialRegister");
         return (T) filter;
     }
+
+
 }
