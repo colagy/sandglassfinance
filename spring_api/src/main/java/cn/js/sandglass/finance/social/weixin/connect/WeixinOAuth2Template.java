@@ -1,5 +1,19 @@
 package cn.js.sandglass.finance.social.weixin.connect;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.OAuth2Parameters;
+import org.springframework.social.oauth2.OAuth2Template;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
+import java.nio.charset.Charset;
+import java.util.Map;
+
 @Slf4j
 public class WeixinOAuth2Template extends OAuth2Template {
 
@@ -51,11 +65,11 @@ public class WeixinOAuth2Template extends OAuth2Template {
     @SuppressWarnings("unchecked")
     private AccessGrant getAccessToken(StringBuilder accessTokenRequestUrl) {
 
-        log.info("获取access_token, 请求URL: "+accessTokenRequestUrl.toString());
+        System.out.println("获取access_token, 请求URL: "+accessTokenRequestUrl.toString());
 
         String response = getRestTemplate().getForObject(accessTokenRequestUrl.toString(), String.class);
 
-        log.info("获取access_token, 响应内容: "+response);
+        System.out.println("获取access_token, 响应内容: "+response);
 
         Map<String, Object> result = null;
         try {

@@ -1,5 +1,14 @@
 package cn.js.sandglass.finance.social.weixin.connect;
 
+import cn.js.sandglass.finance.social.weixin.api.Weixin;
+import org.springframework.social.connect.ApiAdapter;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionData;
+import org.springframework.social.connect.support.OAuth2Connection;
+import org.springframework.social.connect.support.OAuth2ConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.OAuth2ServiceProvider;
+
 public class WeixinConnectionFactory extends OAuth2ConnectionFactory<Weixin> {
 
     /**

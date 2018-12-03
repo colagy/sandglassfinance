@@ -1,5 +1,11 @@
 package cn.js.sandglass.finance.social.weixin.connect;
 
+import cn.js.sandglass.finance.social.weixin.api.Weixin;
+import cn.js.sandglass.finance.social.weixin.api.WeixinUserInfo;
+import org.springframework.social.connect.ApiAdapter;
+import org.springframework.social.connect.ConnectionValues;
+import org.springframework.social.connect.UserProfile;
+
 public class WeixinAdapter implements ApiAdapter<Weixin> {
 
     private String openId;
