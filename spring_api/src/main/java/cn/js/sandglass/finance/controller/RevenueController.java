@@ -6,11 +6,13 @@ import cn.js.sandglass.finance.entitiy.RevenueEntity;
 import cn.js.sandglass.finance.service.RevenueService;
 import cn.js.sandglass.finance.service.RevenueTypeService;
 import cn.js.sandglass.finance.valid.RevenueCreateValid;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Api(tags = "收入")
 @RestController
 public class RevenueController {
 

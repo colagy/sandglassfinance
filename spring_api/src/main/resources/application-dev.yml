@@ -4,3 +4,5 @@ server:
     key-store: classpath:sandglass.js.cn.pfx
     key-store-password: 214938487690629
     keyStoreType: PKCS12
+swagger2:
+  enable: true

@@ -17,8 +17,8 @@ public class UserService {
         return userDao.save(userEntity);
     }
 
-    public List<UserEntity> getByUnionid(String unionid) {
-        return userDao.findByUnionid(unionid);
+    public List<UserEntity> getById(String id) {
+        return userDao.findById(id);
     }
 
 }

@@ -1,14 +1,19 @@
 package cn.js.sandglass.finance.service;
 
+import cn.js.sandglass.finance.entitiy.UserDevEntity;
 import cn.js.sandglass.finance.entitiy.UserEntity;
+import cn.js.sandglass.finance.entitiy.UserWechatEntity;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -19,7 +24,16 @@ public class LoginService {
     UserService userService;
 
     @Autowired
+    UserWechatService userWechatService;
+
+    @Autowired
+    UserDevService userDevService;
+
+    @Autowired
     RequestService requestService;
+
+    @Value("${user.salt}")
+    private String SALT ;
 
     @Transactional
     public JSONObject getWeappOpenid(String code) {
@@ -40,20 +54,38 @@ public class LoginService {
     }
 
     @Transactional
-    public UserEntity weappLogin(String unionid, String openid) {
+    public UserWechatEntity weappLogin(String unionid, String openid) {
         // 判断用户是否已存在
-        List<UserEntity> userRes = userService.getByUnionid(unionid);
+        List<UserWechatEntity> wechatUserRes = userWechatService.getByUnionid(unionid);
         // 用户不存在  创建新用户
-        if (userRes == null || userRes.size() == 0) {
-            UserEntity newUser = new UserEntity();
-            newUser.setOpenid(openid);
-            newUser.setUnionid(unionid);
-            newUser.setType(0);
-            UserEntity userCreateRes = userService.create(newUser);
-            return userCreateRes;
+        if (wechatUserRes == null || wechatUserRes.size() == 0) {
+            UserEntity userEntity = new UserEntity();
+            userEntity.setType(0);
+            UserEntity userEntityRes = userService.create(userEntity);
+            UserWechatEntity newWechatUser = new UserWechatEntity();
+            newWechatUser.setOpenid(openid);
+            newWechatUser.setUnionid(unionid);
+            newWechatUser.setUid(userEntityRes.getId());
+            UserWechatEntity userWechatEntityRes = userWechatService.create(newWechatUser);
+
+            return userWechatEntityRes;
         }
         // 用户存在  返回用户信息
-        return userRes.get(0);
+        return wechatUserRes.get(0);
+    }
+
+    public Object devLogin(UserDevEntity userDevEntity) {
+        String username = userDevEntity.getUsername();
+        String pwSha1 = DigestUtils.sha1Hex(username + userDevEntity.getPassword() + SALT);
+        userDevEntity.setPassword(pwSha1);
+        UserDevEntity userDevEntityRes = userDevService.getByUsernameAndPassword(username, pwSha1);
+        JSONObject jsonObject = new JSONObject();
+        if (!StringUtils.isEmpty(userDevEntityRes)) {
+            jsonObject.put("msg", "ok");
+        }else {
+            jsonObject.put("msg", "err");
+        }
+        return jsonObject;
     }
 
 }

@@ -1,7 +1,5 @@
 //package cn.js.sandglass.finance.security;
 //
-//import cn.js.sandglass.finance.dao.UserDao;
-//import cn.js.sandglass.finance.entitiy.UserEntity;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.stereotype.Service;

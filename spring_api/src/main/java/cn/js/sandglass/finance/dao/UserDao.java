@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface UserDao extends JpaRepository<UserEntity, Long> {
 
-    public List<UserEntity> findByUnionid(String unionid);
+    public List<UserEntity> findById(String id);
 
 }

@@ -1,5 +1,8 @@
 package cn.js.sandglass.finance.controller;
 
+import io.swagger.annotations.Api;
+
+@Api(tags = "报表")
 public class SheetController {
 
     /**

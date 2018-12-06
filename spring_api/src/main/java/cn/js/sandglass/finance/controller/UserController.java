@@ -1,9 +1,11 @@
 package cn.js.sandglass.finance.controller;
 
 import cn.js.sandglass.finance.dao.UserDao;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@Api(tags = "用户")
 @RestController
 public class UserController {
 

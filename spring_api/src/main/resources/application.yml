@@ -40,3 +40,7 @@ ssb: # 第三方登录配置
         app-id: wx3b0c244789896cce
         app-secret: ddb4faa8414920750c6845fe9737b69e
         provider-id: wechat
+swagger2: # api文档
+  enable: true
+user: # 用户密码加密
+  salt: sandglassfinance_password_SALT_+++++++++++---------------------- # 盐

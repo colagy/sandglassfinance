@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Import;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.PostConstruct;
 import java.util.TimeZone;
@@ -12,6 +13,7 @@ import java.util.TimeZone;
 @SpringBootApplication
 @Import(SpringConfiguration.class)
 @EnableCaching
+@EnableSwagger2
 public class FinanceApplication {
 
     @PostConstruct

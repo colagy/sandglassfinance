@@ -6,10 +6,12 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user", schema = "sandglassfinance", catalog = "")
-public class UserEntity {
+@Table(name = "user_wechat", schema = "sandglassfinance", catalog = "")
+public class UserWechatEntity {
     private String id;
-    private int type; // 0,微信 1,开发者
+    private String uid;
+    private String unionid;
+    private String openid = "";
     private Integer deleted = 0;
 
     @Id
@@ -25,13 +27,33 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "type", nullable = false)
-    public int getType() {
-        return type;
+    @Column(name = "uid",nullable = false,unique = true)
+    public String getUid() {
+        return uid;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    @Basic
+    @Column(name = "unionid", nullable = false, unique = true)
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
+    }
+
+    @Basic
+    @Column(name = "openid")
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
     @Basic
@@ -48,14 +70,16 @@ public class UserEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        UserWechatEntity that = (UserWechatEntity) o;
         return Objects.equals(id, that.id) &&
+                Objects.equals(unionid, that.unionid) &&
+                Objects.equals(openid, that.openid) &&
                 Objects.equals(deleted, that.deleted);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, deleted);
+        return Objects.hash(id, unionid, openid, deleted);
     }
 
 
