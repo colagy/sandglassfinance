@@ -29,6 +29,7 @@ services:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
       - /tmp/data:/data
     command: redis-server /usr/local/etc/redis/redis.conf --requirepass sandglassfinance_Redis_password+-
+    restart: always
 
   spring_api:
     image: maven:3.5-jdk-11
