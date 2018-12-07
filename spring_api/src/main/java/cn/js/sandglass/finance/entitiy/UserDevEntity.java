@@ -9,6 +9,7 @@ import java.util.Objects;
 @Table(name = "user_dev", schema = "sandglassfinance", catalog = "")
 public class UserDevEntity {
     private String id;
+    private String uid;
     private String username;
     private String password;
     private Integer deleted = 0;
@@ -23,6 +24,16 @@ public class UserDevEntity {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "uid", nullable = false, unique = true)
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     @Basic

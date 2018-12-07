@@ -7,6 +7,7 @@ import cn.js.sandglass.finance.util.WeappUtil;
 import cn.js.sandglass.finance.service.LoginService;
 import cn.js.sandglass.finance.service.RequestService;
 import cn.js.sandglass.finance.service.UserService;
+import cn.js.sandglass.finance.util.response.RetResult;
 import cn.js.sandglass.finance.valid.LoginDevValid;
 import cn.js.sandglass.finance.valid.LoginWeappSessionValid;
 import cn.js.sandglass.finance.valid.LoginWeappValid;
@@ -58,7 +59,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "/login.dev")
-    public Object dev(@Valid @RequestBody LoginDevValid loginDevValid){
+    public RetResult<Object> dev(@Valid @RequestBody LoginDevValid loginDevValid){
         UserDevEntity userDevEntity =new UserDevEntity();
         userDevEntity.setUsername(loginDevValid.getUsername());
         userDevEntity.setPassword(loginDevValid.getPassword());

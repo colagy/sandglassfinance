@@ -1,4 +1,4 @@
-package cn.js.sandglass.finance.configuration;
+package cn.js.sandglass.finance.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class Swagger2Configuration {
+public class Swagger2Config {
 
     @Value("${swagger2.enable}")
     private boolean enable;

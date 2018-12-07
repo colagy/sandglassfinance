@@ -33,6 +33,11 @@ server:
     keyStoreType: PKCS12
   servlet:
     context-path: /api/v1 # 接口前置url
+security:
+  oauth2:
+    client:
+      client-id: ea12a1c0-f9f7-11e8-9295-0242ac120002
+      client-secret: da3b6a5efeb4a87be4742be07161766d52f91991
 ssb: # 第三方登录配置
   security:
     social:

@@ -3,6 +3,9 @@ package cn.js.sandglass.finance.service;
 import cn.js.sandglass.finance.entitiy.UserDevEntity;
 import cn.js.sandglass.finance.entitiy.UserEntity;
 import cn.js.sandglass.finance.entitiy.UserWechatEntity;
+import cn.js.sandglass.finance.util.response.RetErr;
+import cn.js.sandglass.finance.util.response.RetResponse;
+import cn.js.sandglass.finance.util.response.RetResult;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -74,18 +77,21 @@ public class LoginService {
         return wechatUserRes.get(0);
     }
 
-    public Object devLogin(UserDevEntity userDevEntity) {
+    public RetResult<Object> devLogin(UserDevEntity userDevEntity) {
         String username = userDevEntity.getUsername();
+        // 加密密码
         String pwSha1 = DigestUtils.sha1Hex(username + userDevEntity.getPassword() + SALT);
         userDevEntity.setPassword(pwSha1);
+        // 查询用户
         UserDevEntity userDevEntityRes = userDevService.getByUsernameAndPassword(username, pwSha1);
-        JSONObject jsonObject = new JSONObject();
+        // 创建返回对象
         if (!StringUtils.isEmpty(userDevEntityRes)) {
-            jsonObject.put("msg", "ok");
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("uid",userDevEntityRes.getUid());
+            return RetResponse.ok(jsonObject);
         }else {
-            jsonObject.put("msg", "err");
+            return RetResponse.err(RetErr.ERR);
         }
-        return jsonObject;
     }
 
 }

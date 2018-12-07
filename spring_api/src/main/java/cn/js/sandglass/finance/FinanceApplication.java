@@ -1,6 +1,6 @@
 package cn.js.sandglass.finance;
 
-import cn.js.sandglass.finance.configuration.SpringConfiguration;
+import cn.js.sandglass.finance.config.SpringConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @SpringBootApplication
-@Import(SpringConfiguration.class)
+@Import(SpringConfig.class)
 @EnableCaching
 @EnableSwagger2
 public class FinanceApplication {

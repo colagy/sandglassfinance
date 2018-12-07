@@ -1,4 +1,4 @@
-package cn.js.sandglass.finance.configuration;
+package cn.js.sandglass.finance.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -27,12 +27,12 @@ import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
 @EnableCaching
-public class RedisConfiguration extends CachingConfigurerSupport {
+public class RedisConfig extends CachingConfigurerSupport {
 
     /**
      * Logger
      */
-    private static final Logger lg = LoggerFactory.getLogger(RedisConfiguration.class);
+    private static final Logger lg = LoggerFactory.getLogger(RedisConfig.class);
 
 
     @Autowired

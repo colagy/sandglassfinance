@@ -1,6 +1,8 @@
 package cn.js.sandglass.finance.controller;
 
 import cn.js.sandglass.finance.entitiy.AccountbookEntity;
+import cn.js.sandglass.finance.util.response.RetResponse;
+import cn.js.sandglass.finance.util.response.RetResult;
 import cn.js.sandglass.finance.valid.*;
 import cn.js.sandglass.finance.service.AccountbookService;
 import com.alibaba.fastjson.JSONObject;
@@ -20,15 +22,15 @@ public class AccountbookController {
 
     @ApiImplicitParam(name = "accountbookCreateValid",defaultValue = "{name:'566545'}")
     @PostMapping(value = "/accountbook")
-    public AccountbookEntity create(@Valid @RequestBody AccountbookCreateValid accountbookCreateValid) {
+    public RetResult<AccountbookEntity> create(@Valid @RequestBody AccountbookCreateValid accountbookCreateValid) {
         var accountbookEntity=new AccountbookEntity();
         accountbookEntity.setName(accountbookCreateValid.getName());
-        return  accountbookService.create(accountbookEntity);
+        return RetResponse.ok(accountbookService.create(accountbookEntity));
     }
 
     @GetMapping(value = "/accountbook.list")
-    public List<AccountbookEntity> get() {
-        return accountbookService.get();
+    public RetResult<List<AccountbookEntity>> get() {
+        return RetResponse.ok(accountbookService.get());
     }
 
     @GetMapping(value = "/accountbook")
