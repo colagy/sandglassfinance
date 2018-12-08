@@ -1,6 +1,6 @@
 package cn.js.sandglass.finance.controller;
 
-import cn.js.sandglass.finance.entitiy.AccountbookEntity;
+import cn.js.sandglass.finance.entitiy.Accountbook;
 import cn.js.sandglass.finance.util.response.RetResponse;
 import cn.js.sandglass.finance.util.response.RetResult;
 import cn.js.sandglass.finance.valid.*;
@@ -22,25 +22,25 @@ public class AccountbookController {
 
     @ApiImplicitParam(name = "accountbookCreateValid",defaultValue = "{name:'566545'}")
     @PostMapping(value = "/accountbook")
-    public RetResult<AccountbookEntity> create(@Valid @RequestBody AccountbookCreateValid accountbookCreateValid) {
-        var accountbookEntity=new AccountbookEntity();
+    public RetResult<Accountbook> create(@Valid @RequestBody AccountbookCreateValid accountbookCreateValid) {
+        var accountbookEntity=new Accountbook();
         accountbookEntity.setName(accountbookCreateValid.getName());
         return RetResponse.ok(accountbookService.create(accountbookEntity));
     }
 
     @GetMapping(value = "/accountbook.list")
-    public RetResult<List<AccountbookEntity>> get() {
+    public RetResult<List<Accountbook>> get() {
         return RetResponse.ok(accountbookService.get());
     }
 
     @GetMapping(value = "/accountbook")
-    public AccountbookEntity getOne(@RequestParam(value = "id",required = true) String id){
+    public Accountbook getOne(@RequestParam(value = "id",required = true) String id){
         return accountbookService.getOne(id);
     }
 
     @PutMapping(value = "/accountbook")
-    public AccountbookEntity update(@Valid @RequestBody AccountbookUpdateValid accountbookUpdateValid){
-        AccountbookEntity accountbookEntity=new AccountbookEntity();
+    public Accountbook update(@Valid @RequestBody AccountbookUpdateValid accountbookUpdateValid){
+        Accountbook accountbookEntity=new Accountbook();
         accountbookEntity.setId(accountbookUpdateValid.getId());
         accountbookEntity.setName(accountbookUpdateValid.getName());
         accountbookEntity.setMark(accountbookUpdateValid.getMark());
@@ -49,7 +49,7 @@ public class AccountbookController {
 
     @DeleteMapping(value = "/accountbook")
     public JSONObject delete(@Valid @RequestBody AccountbookDeleteValid accountbookDeleteValid){
-        AccountbookEntity accountbookEntity=new AccountbookEntity();
+        Accountbook accountbookEntity=new Accountbook();
         accountbookService.delete(accountbookEntity);
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("msg","delete ok");

@@ -1,8 +1,8 @@
 package cn.js.sandglass.finance.service;
 
-import cn.js.sandglass.finance.entitiy.UserDevEntity;
-import cn.js.sandglass.finance.entitiy.UserEntity;
-import cn.js.sandglass.finance.entitiy.UserWechatEntity;
+import cn.js.sandglass.finance.entitiy.UserDev;
+import cn.js.sandglass.finance.entitiy.User;
+import cn.js.sandglass.finance.entitiy.UserWechat;
 import cn.js.sandglass.finance.util.response.RetErr;
 import cn.js.sandglass.finance.util.response.RetResponse;
 import cn.js.sandglass.finance.util.response.RetResult;
@@ -57,37 +57,37 @@ public class LoginService {
     }
 
     @Transactional
-    public UserWechatEntity weappLogin(String unionid, String openid) {
+    public UserWechat weappLogin(String unionid, String openid) {
         // 判断用户是否已存在
-        List<UserWechatEntity> wechatUserRes = userWechatService.getByUnionid(unionid);
+        UserWechat wechatUserRes = userWechatService.getByUnionid(unionid);
         // 用户不存在  创建新用户
-        if (wechatUserRes == null || wechatUserRes.size() == 0) {
-            UserEntity userEntity = new UserEntity();
-            userEntity.setType(0);
-            UserEntity userEntityRes = userService.create(userEntity);
-            UserWechatEntity newWechatUser = new UserWechatEntity();
+        if (wechatUserRes == null) {
+            User user = new User();
+            user.setType("wechat");
+            User userRes = userService.create(user);
+            UserWechat newWechatUser = new UserWechat();
             newWechatUser.setOpenid(openid);
             newWechatUser.setUnionid(unionid);
-            newWechatUser.setUid(userEntityRes.getId());
-            UserWechatEntity userWechatEntityRes = userWechatService.create(newWechatUser);
+            newWechatUser.setUid(userRes.getId());
+            UserWechat userWechatRes = userWechatService.create(newWechatUser);
 
-            return userWechatEntityRes;
+            return userWechatRes;
         }
         // 用户存在  返回用户信息
-        return wechatUserRes.get(0);
+        return wechatUserRes;
     }
 
-    public RetResult<Object> devLogin(UserDevEntity userDevEntity) {
-        String username = userDevEntity.getUsername();
+    public RetResult<Object> devLogin(UserDev userDev) {
+        String username = userDev.getUsername();
         // 加密密码
-        String pwSha1 = DigestUtils.sha1Hex(username + userDevEntity.getPassword() + SALT);
-        userDevEntity.setPassword(pwSha1);
+        String pwSha1 = DigestUtils.sha1Hex(username + userDev.getPassword() + SALT);
+        userDev.setPassword(pwSha1);
         // 查询用户
-        UserDevEntity userDevEntityRes = userDevService.getByUsernameAndPassword(username, pwSha1);
+        UserDev userDevRes = userDevService.getByUsernameAndPassword(username, pwSha1);
         // 创建返回对象
-        if (!StringUtils.isEmpty(userDevEntityRes)) {
+        if (!StringUtils.isEmpty(userDevRes)) {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("uid",userDevEntityRes.getUid());
+            jsonObject.put("uid",userDevRes.getUid());
             return RetResponse.ok(jsonObject);
         }else {
             return RetResponse.err(RetErr.ERR);

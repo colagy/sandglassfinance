@@ -1,5 +1,6 @@
 package cn.js.sandglass.finance.entitiy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -7,17 +8,41 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user_dev", schema = "sandglassfinance", catalog = "")
-public class UserDevEntity {
-    private String id;
-    private String uid;
-    private String username;
-    private String password;
-    private Integer deleted = 0;
+public class UserDev {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "uid", nullable = false, unique = true)
+    private String uid;
+
+    @Basic
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+
+    @JsonIgnore
+    @Basic
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted = 0;
+
+    public UserDev() {
+    }
+
+    public UserDev(String id, String uid, String username, String password) {
+        this.id = id;
+        this.uid = uid;
+        this.username = username;
+        this.password = password;
+    }
+
     public String getId() {
         return id;
     }
@@ -26,8 +51,6 @@ public class UserDevEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "uid", nullable = false, unique = true)
     public String getUid() {
         return uid;
     }
@@ -36,8 +59,6 @@ public class UserDevEntity {
         this.uid = uid;
     }
 
-    @Basic
-    @Column(name = "username", nullable = false, unique = true)
     public String getUsername() {
         return username;
     }
@@ -46,8 +67,6 @@ public class UserDevEntity {
         this.username = username;
     }
 
-    @Basic
-    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -56,8 +75,6 @@ public class UserDevEntity {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "deleted")
     public Integer getDeleted() {
         return deleted;
     }
@@ -70,7 +87,7 @@ public class UserDevEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserDevEntity that = (UserDevEntity) o;
+        UserDev that = (UserDev) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(username, that.username) &&
                 Objects.equals(password, that.password) &&

@@ -6,17 +6,31 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "account_revenue", schema = "sandglassfinance", catalog = "")
-public class AccountRevenueEntity {
-    private String id;
-    private String accountId;
-    private String revenueId;
-    private String mark = "";
-    private Integer deleted = 0;
+public class AccountRevenue {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "account_id", nullable = false)
+    private String accountId;
+
+    @Basic
+    @Column(name = "revenue_id", nullable = false)
+    private String revenueId;
+
+    @Basic
+    @Column(name = "mark")
+    private String mark = "";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted = 0;
+
+
     public String getId() {
         return id;
     }
@@ -25,8 +39,6 @@ public class AccountRevenueEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "account_id", nullable = false)
     public String getAccountId() {
         return accountId;
     }
@@ -35,8 +47,6 @@ public class AccountRevenueEntity {
         this.accountId = accountId;
     }
 
-    @Basic
-    @Column(name = "revenue_id", nullable = false)
     public String getRevenueId() {
         return revenueId;
     }
@@ -45,8 +55,6 @@ public class AccountRevenueEntity {
         this.revenueId = revenueId;
     }
 
-    @Basic
-    @Column(name = "mark")
     public String getMark() {
         return mark;
     }
@@ -55,8 +63,6 @@ public class AccountRevenueEntity {
         this.mark = mark;
     }
 
-    @Basic
-    @Column(name = "deleted")
     public Integer getDeleted() {
         return deleted;
     }

@@ -6,18 +6,27 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "expenditure_type", schema = "sandglassfinance", catalog = "")
-public class ExpenditureTypeEntity {
-    private String id;
-    private String type;
-    private String name;
-    private String mark="";
-    private Integer deleted=0;
+@Table(name = "custom_expenditure_type", schema = "sandglassfinance", catalog = "")
+public class CustomExpenditureType {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name="idGenerator", strategy="uuid")
     @GeneratedValue(generator="idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "name",nullable = false)
+    private String name;
+
+    @Basic
+    @Column(name = "mark")
+    private String mark="";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted=0;
+
     public String getId() {
         return id;
     }
@@ -26,18 +35,6 @@ public class ExpenditureTypeEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "type",nullable = false)
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Basic
-    @Column(name = "name",nullable = false)
     public String getName() {
         return name;
     }
@@ -46,8 +43,6 @@ public class ExpenditureTypeEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "mark")
     public String getMark() {
         return mark;
     }
@@ -56,8 +51,6 @@ public class ExpenditureTypeEntity {
         this.mark = mark;
     }
 
-    @Basic
-    @Column(name = "deleted")
     public Integer getDeleted() {
         return deleted;
     }
@@ -70,9 +63,8 @@ public class ExpenditureTypeEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ExpenditureTypeEntity that = (ExpenditureTypeEntity) o;
+        CustomExpenditureType that = (CustomExpenditureType) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(type, that.type) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(mark, that.mark) &&
                 Objects.equals(deleted, that.deleted);
@@ -81,6 +73,6 @@ public class ExpenditureTypeEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, type, name, mark, deleted);
+        return Objects.hash(id,  name, mark, deleted);
     }
 }

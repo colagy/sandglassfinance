@@ -1,7 +1,7 @@
 package cn.js.sandglass.finance.controller;
 
-import cn.js.sandglass.finance.entitiy.AccountFixedExpenditureEntity;
-import cn.js.sandglass.finance.entitiy.FixedExpenditureEntity;
+import cn.js.sandglass.finance.entitiy.AccountFixedExpenditure;
+import cn.js.sandglass.finance.entitiy.FixedExpenditure;
 import cn.js.sandglass.finance.service.FixedExpenditureService;
 import cn.js.sandglass.finance.valid.FixedExpenditureCreateValid;
 import io.swagger.annotations.Api;
@@ -19,22 +19,22 @@ public class FixedExpenditureController {
 
     @PostMapping(value = "fixed.expenditure")
     public Object create(@Valid @RequestBody FixedExpenditureCreateValid fixedExpenditureCreateValid) {
-        FixedExpenditureEntity fixedExpenditureEntity = new FixedExpenditureEntity();
-        fixedExpenditureEntity.setDefaultExpenditureType(fixedExpenditureCreateValid.getDefaultExpenditureType());
-        fixedExpenditureEntity.setExpenditureTypeId(fixedExpenditureCreateValid.getExpenditureTypeId());
-        fixedExpenditureEntity.setTimeUnit(fixedExpenditureCreateValid.getTimeUnit());
-        fixedExpenditureEntity.setStartTime(fixedExpenditureCreateValid.getStartTime());
-        fixedExpenditureEntity.setEndTime(fixedExpenditureCreateValid.getEndTime());
-        fixedExpenditureEntity.setAmount(fixedExpenditureCreateValid.getAmount());
-        fixedExpenditureEntity.setDay(fixedExpenditureCreateValid.getDay());
-        fixedExpenditureEntity.setMonth(fixedExpenditureCreateValid.getMonth());
-        fixedExpenditureEntity.setWeek(fixedExpenditureCreateValid.getWeek());
-        fixedExpenditureEntity.setMark(fixedExpenditureCreateValid.getMark());
+        FixedExpenditure fixedExpenditure = new FixedExpenditure();
+        fixedExpenditure.setDefaultExpenditureType(fixedExpenditureCreateValid.getDefaultExpenditureType());
+        fixedExpenditure.setExpenditureTypeId(fixedExpenditureCreateValid.getExpenditureTypeId());
+        fixedExpenditure.setTimeUnit(fixedExpenditureCreateValid.getTimeUnit());
+        fixedExpenditure.setStartTime(fixedExpenditureCreateValid.getStartTime());
+        fixedExpenditure.setEndTime(fixedExpenditureCreateValid.getEndTime());
+        fixedExpenditure.setAmount(fixedExpenditureCreateValid.getAmount());
+        fixedExpenditure.setDay(fixedExpenditureCreateValid.getDay());
+        fixedExpenditure.setMonth(fixedExpenditureCreateValid.getMonth());
+        fixedExpenditure.setWeek(fixedExpenditureCreateValid.getWeek());
+        fixedExpenditure.setMark(fixedExpenditureCreateValid.getMark());
 
-        AccountFixedExpenditureEntity accountFixedExpenditureEntity = new AccountFixedExpenditureEntity();
-        accountFixedExpenditureEntity.setAccountId(fixedExpenditureCreateValid.getAccountId());
+        AccountFixedExpenditure accountFixedExpenditure = new AccountFixedExpenditure();
+        accountFixedExpenditure.setAccountId(fixedExpenditureCreateValid.getAccountId());
 
-        return fixedExpenditureService.create(accountFixedExpenditureEntity, fixedExpenditureEntity);
+        return fixedExpenditureService.create(accountFixedExpenditure, fixedExpenditure);
     }
 
     @GetMapping(value = "fixed.expenditure")

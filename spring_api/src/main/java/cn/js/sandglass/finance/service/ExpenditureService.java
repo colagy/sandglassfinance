@@ -2,8 +2,8 @@ package cn.js.sandglass.finance.service;
 
 import cn.js.sandglass.finance.dao.AccountExpenditureDao;
 import cn.js.sandglass.finance.dao.ExpenditureDao;
-import cn.js.sandglass.finance.entitiy.AccountExpenditureEntity;
-import cn.js.sandglass.finance.entitiy.ExpenditureEntity;
+import cn.js.sandglass.finance.entitiy.AccountExpenditure;
+import cn.js.sandglass.finance.entitiy.Expenditure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,23 +20,23 @@ public class ExpenditureService {
     AccountExpenditureDao accountExpenditureDao;
 
     @Transactional
-    public ExpenditureEntity create(AccountExpenditureEntity accountExpenditureEntity, ExpenditureEntity expenditureEntity){
-        ExpenditureEntity saveRes= save(expenditureEntity);
+    public Expenditure create(AccountExpenditure accountExpenditure, Expenditure expenditure){
+        Expenditure saveRes= save(expenditure);
 
-        accountExpenditureEntity.setExpenditureId(saveRes.getId());
-        accountExpenditureDao.save(accountExpenditureEntity);
+        accountExpenditure.setExpenditureId(saveRes.getId());
+        accountExpenditureDao.save(accountExpenditure);
         return saveRes;
     }
 
-    public ExpenditureEntity save(ExpenditureEntity expenditureEntity){
-        return expenditureDao.save(expenditureEntity);
+    public Expenditure save(Expenditure expenditure){
+        return expenditureDao.save(expenditure);
     }
 
-    public List<ExpenditureEntity> get(String accountId, String startTime, String endTime){
+    public List<Expenditure> get(String accountId, String startTime, String endTime){
         return expenditureDao.getAllByTimeBetween(accountId,startTime,endTime);
     }
 
-    public ExpenditureEntity getOne(String expenditureId){
+    public Expenditure getOne(String expenditureId){
         return expenditureDao.getById(expenditureId);
     }
 

@@ -8,19 +8,38 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "revenue", schema = "sandglassfinance", catalog = "")
-public class RevenueEntity {
-    private String id;
-    private long defaultRevenueType;
-    private String revenueTypeId;
-    private Timestamp time;
-    private Double amount;
-    private String mark="";
-    private Integer deleted=0;
+public class Revenue {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name="idGenerator", strategy="uuid")
     @GeneratedValue(generator="idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "default_revenue_type",nullable = false)
+    private long defaultRevenueType;
+
+    @Basic
+    @Column(name = "revenue_type_id",nullable = false)
+    private String revenueTypeId;
+
+    @Basic
+    @Column(name = "time",nullable = false)
+    private Timestamp time;
+
+    @Basic
+    @Column(name = "amount",nullable = false, precision = 17, scale = 2)
+    private Double amount;
+
+    @Basic
+    @Column(name = "mark")
+    private String mark="";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted=0;
+
     public String getId() {
         return id;
     }
@@ -29,8 +48,6 @@ public class RevenueEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "default_revenue_type",nullable = false)
     public long getDefaultRevenueType() {
         return defaultRevenueType;
     }
@@ -39,8 +56,6 @@ public class RevenueEntity {
         this.defaultRevenueType = defaultRevenueType;
     }
 
-    @Basic
-    @Column(name = "revenue_type_id",nullable = false)
     public String getRevenueTypeId() {
         return revenueTypeId;
     }
@@ -49,8 +64,6 @@ public class RevenueEntity {
         this.revenueTypeId = revenueTypeId;
     }
 
-    @Basic
-    @Column(name = "time",nullable = false)
     public Timestamp getTime() {
         return time;
     }
@@ -59,8 +72,6 @@ public class RevenueEntity {
         this.time = time;
     }
 
-    @Basic
-    @Column(name = "amount",nullable = false, precision = 17, scale = 2)
     public Double getAmount() {
         return amount;
     }
@@ -69,8 +80,6 @@ public class RevenueEntity {
         this.amount = amount;
     }
 
-    @Basic
-    @Column(name = "mark")
     public String getMark() {
         return mark;
     }
@@ -79,8 +88,6 @@ public class RevenueEntity {
         this.mark = mark;
     }
 
-    @Basic
-    @Column(name = "deleted")
     public Integer getDeleted() {
         return deleted;
     }
@@ -93,7 +100,7 @@ public class RevenueEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RevenueEntity that = (RevenueEntity) o;
+        Revenue that = (Revenue) o;
         return defaultRevenueType == that.defaultRevenueType &&
                 amount == that.amount &&
                 Objects.equals(id, that.id) &&

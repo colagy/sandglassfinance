@@ -1,7 +1,7 @@
 package cn.js.sandglass.finance.controller;
 
-import cn.js.sandglass.finance.entitiy.UserDevEntity;
-import cn.js.sandglass.finance.entitiy.UserWechatEntity;
+import cn.js.sandglass.finance.entitiy.UserDev;
+import cn.js.sandglass.finance.entitiy.UserWechat;
 import cn.js.sandglass.finance.service.UserWechatService;
 import cn.js.sandglass.finance.util.WeappUtil;
 import cn.js.sandglass.finance.service.LoginService;
@@ -49,7 +49,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "/login.weapp")
-    public UserWechatEntity weapp(@Valid @RequestBody LoginWeappValid loginWeappValid) {
+    public UserWechat weapp(@Valid @RequestBody LoginWeappValid loginWeappValid) {
         WeappUtil weappUtil=new WeappUtil();
         JSONObject jsonObject= weappUtil.getUserInfo(loginWeappValid.getEncryptedData(),loginWeappValid.getSessionKey(),loginWeappValid.getIv());
         System.out.println(jsonObject);
@@ -60,10 +60,10 @@ public class LoginController {
 
     @PostMapping(value = "/login.dev")
     public RetResult<Object> dev(@Valid @RequestBody LoginDevValid loginDevValid){
-        UserDevEntity userDevEntity =new UserDevEntity();
-        userDevEntity.setUsername(loginDevValid.getUsername());
-        userDevEntity.setPassword(loginDevValid.getPassword());
-        return loginService.devLogin(userDevEntity);
+        UserDev userDev =new UserDev();
+        userDev.setUsername(loginDevValid.getUsername());
+        userDev.setPassword(loginDevValid.getPassword());
+        return loginService.devLogin(userDev);
     }
 
 }

@@ -8,19 +8,38 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "expenditure", schema = "sandglassfinance", catalog = "")
-public class ExpenditureEntity {
-    private String id;
-    private long defaultExpenditureType;
-    private String expenditureTypeId;
-    private Timestamp time;
-    private long amount;
-    private String mark="";
-    private Integer deleted=0;
+public class Expenditure {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name="idGenerator", strategy="uuid")
     @GeneratedValue(generator="idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "default_expenditure_type",nullable = false)
+    private long defaultExpenditureType;
+
+    @Basic
+    @Column(name = "expenditure_type_id",nullable = false)
+    private String expenditureTypeId;
+
+    @Basic
+    @Column(name = "time",nullable = false)
+    private Timestamp time;
+
+    @Basic
+    @Column(name = "amount",nullable = false)
+    private long amount;
+
+    @Basic
+    @Column(name = "mark")
+    private String mark="";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted=0;
+
     public String getId() {
         return id;
     }
@@ -29,8 +48,6 @@ public class ExpenditureEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "default_expenditure_type",nullable = false)
     public long getDefaultExpenditureType() {
         return defaultExpenditureType;
     }
@@ -39,8 +56,6 @@ public class ExpenditureEntity {
         this.defaultExpenditureType = defaultExpenditureType;
     }
 
-    @Basic
-    @Column(name = "expenditure_type_id",nullable = false)
     public String getExpenditureTypeId() {
         return expenditureTypeId;
     }
@@ -49,8 +64,6 @@ public class ExpenditureEntity {
         this.expenditureTypeId = expenditureTypeId;
     }
 
-    @Basic
-    @Column(name = "time",nullable = false)
     public Timestamp getTime() {
         return time;
     }
@@ -59,8 +72,6 @@ public class ExpenditureEntity {
         this.time = time;
     }
 
-    @Basic
-    @Column(name = "amount",nullable = false)
     public long getAmount() {
         return amount;
     }
@@ -69,8 +80,6 @@ public class ExpenditureEntity {
         this.amount = amount;
     }
 
-    @Basic
-    @Column(name = "mark")
     public String getMark() {
         return mark;
     }
@@ -79,8 +88,6 @@ public class ExpenditureEntity {
         this.mark = mark;
     }
 
-    @Basic
-    @Column(name = "deleted")
     public Integer getDeleted() {
         return deleted;
     }
@@ -93,7 +100,7 @@ public class ExpenditureEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ExpenditureEntity that = (ExpenditureEntity) o;
+        Expenditure that = (Expenditure) o;
         return defaultExpenditureType == that.defaultExpenditureType &&
                 amount == that.amount &&
                 Objects.equals(id, that.id) &&

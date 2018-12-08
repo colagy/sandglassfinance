@@ -7,25 +7,59 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "fixed_revenue", schema = "sandglassfinance", catalog = "")
-public class FixedRevenueEntity {
-    private String id;
-    private long defaultRevenueType;
-    private String revenueTypeId;
-    private String timeUnit;
-    private String month = "";
-    private String day = "";
-    private String week = "";
-    private Timestamp startTime;
-    private Timestamp endTime;
-    private long amount;
-    private String mark = "";
-    private Integer deleted = 0;
+@Table(name = "fixed_expenditure", schema = "sandglassfinance", catalog = "")
+public class FixedExpenditure {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "default_expenditure_type", nullable = false)
+    private long defaultExpenditureType;
+
+    @Basic
+    @Column(name = "expenditure_type_id", nullable = false)
+    private String expenditureTypeId;
+
+    @Basic
+    @Column(name = "time_unit", nullable = false)
+    private String timeUnit;
+
+    @Basic
+    @Column(name = "month")
+    private String month = "";
+
+    @Basic
+    @Column(name = "day")
+    private String day = "";
+
+    @Basic
+    @Column(name = "week")
+    private String week = "";
+
+    @Basic
+    @Column(name = "start_time", nullable = false)
+    private Timestamp startTime;
+
+    @Basic
+    @Column(name = "end_time", nullable = false)
+    private Timestamp endTime;
+
+    @Basic
+    @Column(name = "amount")
+    private long amount;
+
+    @Basic
+    @Column(name = "mark")
+    private String mark = "";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted = 0;
+
     public String getId() {
         return id;
     }
@@ -34,28 +68,22 @@ public class FixedRevenueEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "default_revenue_type", nullable = false)
-    public long getDefaultRevenueType() {
-        return defaultRevenueType;
+    public long getDefaultExpenditureType() {
+        return defaultExpenditureType;
     }
 
-    public void setDefaultRevenueType(long defaultFixedRevenueType) {
-        this.defaultRevenueType = defaultFixedRevenueType;
+    public void setDefaultExpenditureType(long defaultFixedExpenditureType) {
+        this.defaultExpenditureType = defaultFixedExpenditureType;
     }
 
-    @Basic
-    @Column(name = "revenue_type_id", nullable = false)
-    public String getRevenueTypeId() {
-        return revenueTypeId;
+    public String getExpenditureTypeId() {
+        return expenditureTypeId;
     }
 
-    public void setRevenueTypeId(String revenueTypeId) {
-        this.revenueTypeId = revenueTypeId;
+    public void setExpenditureTypeId(String expenditureTypeId) {
+        this.expenditureTypeId = expenditureTypeId;
     }
 
-    @Basic
-    @Column(name = "time_unit", nullable = false)
     public String getTimeUnit() {
         return timeUnit;
     }
@@ -64,8 +92,6 @@ public class FixedRevenueEntity {
         this.timeUnit = timeUnit;
     }
 
-    @Basic
-    @Column(name = "month")
     public String getMonth() {
         return month;
     }
@@ -74,8 +100,6 @@ public class FixedRevenueEntity {
         this.month = month;
     }
 
-    @Basic
-    @Column(name = "day")
     public String getDay() {
         return day;
     }
@@ -84,8 +108,6 @@ public class FixedRevenueEntity {
         this.day = day;
     }
 
-    @Basic
-    @Column(name = "week")
     public String getWeek() {
         return week;
     }
@@ -94,8 +116,6 @@ public class FixedRevenueEntity {
         this.week = week;
     }
 
-    @Basic
-    @Column(name = "start_time", nullable = false)
     public Timestamp getStartTime() {
         return startTime;
     }
@@ -104,8 +124,6 @@ public class FixedRevenueEntity {
         this.startTime = startTime;
     }
 
-    @Basic
-    @Column(name = "end_time", nullable = false)
     public Timestamp getEndTime() {
         return endTime;
     }
@@ -114,8 +132,6 @@ public class FixedRevenueEntity {
         this.endTime = endTime;
     }
 
-    @Basic
-    @Column(name = "amount")
     public long getAmount() {
         return amount;
     }
@@ -124,8 +140,6 @@ public class FixedRevenueEntity {
         this.amount = amount;
     }
 
-    @Basic
-    @Column(name = "mark")
     public String getMark() {
         return mark;
     }
@@ -134,8 +148,6 @@ public class FixedRevenueEntity {
         this.mark = mark;
     }
 
-    @Basic
-    @Column(name = "deleted")
     public Integer getDeleted() {
         return deleted;
     }
@@ -148,11 +160,11 @@ public class FixedRevenueEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FixedRevenueEntity that = (FixedRevenueEntity) o;
-        return defaultRevenueType == that.defaultRevenueType &&
+        FixedExpenditure that = (FixedExpenditure) o;
+        return defaultExpenditureType == that.defaultExpenditureType &&
                 amount == that.amount &&
                 Objects.equals(id, that.id) &&
-                Objects.equals(revenueTypeId, that.revenueTypeId) &&
+                Objects.equals(expenditureTypeId, that.expenditureTypeId) &&
                 Objects.equals(timeUnit, that.timeUnit) &&
                 Objects.equals(month, that.month) &&
                 Objects.equals(day, that.day) &&
@@ -166,6 +178,6 @@ public class FixedRevenueEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, defaultRevenueType, revenueTypeId, timeUnit, month, day, week, startTime, endTime, amount, mark, deleted);
+        return Objects.hash(id, defaultExpenditureType, expenditureTypeId, timeUnit, month, day, week, startTime, endTime, amount, mark, deleted);
     }
 }

@@ -1,17 +1,17 @@
 package cn.js.sandglass.finance.dao;
 
-import cn.js.sandglass.finance.entitiy.AccountbookAccountEntity;
-import cn.js.sandglass.finance.entitiy.AccountbookEntity;
+import cn.js.sandglass.finance.entitiy.AccountbookAccount;
+import cn.js.sandglass.finance.entitiy.Accountbook;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface AccountbookAccountDao extends JpaRepository<AccountbookAccountEntity, Long> {
+public interface AccountbookAccountDao extends JpaRepository<AccountbookAccount, Long> {
 
     @Query(value = "select * from accountbook_account a,accountbook b where a.account_id=?1 and a.accountbook_id=b.id",nativeQuery = true)
-    AccountbookEntity getAccountbookByAccountId(String id);
+    Accountbook getAccountbookByAccountId(String id);
 
     /**
      * 1.1、账本关联查询
@@ -19,7 +19,7 @@ public interface AccountbookAccountDao extends JpaRepository<AccountbookAccountE
      * @return
      */
     @Query(value = "select * from accountbook_account where accountbook_id_id=?1", nativeQuery = true)
-    List<AccountbookAccountEntity> getByAccountbookId(String id);
+    List<AccountbookAccount> getByAccountbookId(String id);
 
     /**
      * 1.2、账户关联查询
@@ -27,7 +27,7 @@ public interface AccountbookAccountDao extends JpaRepository<AccountbookAccountE
      * @return
      */
     @Query(value = "select * from accountbook_account where account_id=?1", nativeQuery = true)
-    List<AccountbookAccountEntity> getByAccountId(String id);
+    List<AccountbookAccount> getByAccountId(String id);
 
     /**
      * 2.1、通过账本 id 删除账本账户关系

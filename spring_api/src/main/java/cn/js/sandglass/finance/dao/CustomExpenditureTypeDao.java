@@ -1,7 +1,7 @@
 package cn.js.sandglass.finance.dao;
 
-import cn.js.sandglass.finance.entitiy.CustomExpenditureTypeEntity;
+import cn.js.sandglass.finance.entitiy.CustomExpenditureType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomExpenditureTypeDao extends JpaRepository<CustomExpenditureTypeEntity, Long> {
+public interface CustomExpenditureTypeDao extends JpaRepository<CustomExpenditureType, Long> {
 }

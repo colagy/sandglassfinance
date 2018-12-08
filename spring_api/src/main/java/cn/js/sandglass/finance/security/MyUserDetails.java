@@ -2,23 +2,25 @@ package cn.js.sandglass.finance.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class UserSecurity implements UserDetails {
+public class MyUserDetails implements UserDetails {
 
-    private final String id;
-    //帐号,这里是我数据库里的字段
-    private final String account;
-    //密码
-    private final String password;
+    private String username = "";
+    private String password = "";
+
+    // 用户id
+    private final String uid;
+    // 用户类型
+    private final String type;
     //角色集合
     private final Collection<? extends GrantedAuthority> authorities;
 
-    UserSecurity(String id, String account, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
-        this.account = account;
-        this.password = password;
+    MyUserDetails(String uid, String type, Collection<? extends GrantedAuthority> authorities) {
+        this.uid = uid;
+        this.type = type;
         this.authorities = authorities;
     }
 
@@ -28,9 +30,13 @@ public class UserSecurity implements UserDetails {
         return authorities;
     }
 
-    @JsonIgnore
-    public String getId() {
-        return id;
+    public String getUid() {
+        return uid;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
     }
 
     @JsonIgnore
@@ -39,29 +45,31 @@ public class UserSecurity implements UserDetails {
         return password;
     }
 
-    //虽然我数据库里的字段是 `account`  ,这里还是要写成 `getUsername()`,因为是继承的接口
-    @Override
-    public String getUsername() {
-        return account;
+    public String getType() {
+        return type;
     }
+
     // 账户是否未过期
     @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
+
     // 账户是否未锁定
     @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
+
     // 密码是否未过期
     @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
     // 账户是否激活
     @JsonIgnore
     @Override

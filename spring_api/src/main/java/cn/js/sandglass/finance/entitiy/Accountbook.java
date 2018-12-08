@@ -1,23 +1,38 @@
 package cn.js.sandglass.finance.entitiy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "revenue_type", schema = "sandglassfinance", catalog = "")
-public class RevenueTypeEntity {
-    private String id;
-    private String type;
-    private String name;
-    private String mark="";
-    private Integer deleted=0;
+@Table(name = "accountbook", schema = "sandglassfinance", catalog = "")
+public class Accountbook {
 
     @Id
-    @Column(name = "id")
-    @GenericGenerator(name="idGenerator", strategy="uuid")
-    @GeneratedValue(generator="idGenerator")
+    @Column(name = "id", length = 36)
+    @GenericGenerator(name = "idGenerator", strategy = "uuid")
+    @GeneratedValue(generator = "idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Basic
+    @Column(name = "mark")
+    private String mark = "";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted = 0;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "accountbook",fetch = FetchType.EAGER)
+    private List<Account> accounts;
+
     public String getId() {
         return id;
     }
@@ -26,18 +41,7 @@ public class RevenueTypeEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "type",nullable = false)
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Basic
-    @Column(name = "name",nullable = false)
     public String getName() {
         return name;
     }
@@ -46,8 +50,7 @@ public class RevenueTypeEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "mark")
+
     public String getMark() {
         return mark;
     }
@@ -56,8 +59,7 @@ public class RevenueTypeEntity {
         this.mark = mark;
     }
 
-    @Basic
-    @Column(name = "deleted")
+
     public Integer getDeleted() {
         return deleted;
     }
@@ -70,9 +72,8 @@ public class RevenueTypeEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RevenueTypeEntity that = (RevenueTypeEntity) o;
+        Accountbook that = (Accountbook) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(type, that.type) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(mark, that.mark) &&
                 Objects.equals(deleted, that.deleted);
@@ -80,7 +81,6 @@ public class RevenueTypeEntity {
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, type, name, mark, deleted);
+        return Objects.hash(id, name, mark, deleted);
     }
 }

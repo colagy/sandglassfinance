@@ -2,8 +2,8 @@ spring:
   profiles:
     active: dev # 运行环境
   datasource: # 数据库配置
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:13304/sandglassfinance?serverTimezone=Asia/Shanghai # 数据库地址 时区为上海时间
+    driver: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:13304/sandglassfinance?characterEncoding=utf8&serverTimezone=Asia/Shanghai&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true  # 数据库地址 时区为上海时间
     username: root
     password: sandglassfinance_MySql_password+-
   jpa:

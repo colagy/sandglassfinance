@@ -7,16 +7,27 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "accountbook_account", schema = "sandglassfinance", catalog = "")
-public class AccountbookAccountEntity {
-    private String id;
-    private String accountbookId;
-    private String accountId="";
-    private Integer deleted = 0;
+public class AccountbookAccount {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "accountbook_id", nullable = false)
+    private String accountbookId;
+
+    @Basic
+    @Column(name = "account_id")
+    private String accountId="";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted = 0;
+
+
     public String getId() {
         return id;
     }
@@ -25,8 +36,7 @@ public class AccountbookAccountEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "accountbook_id", nullable = false)
+
     public String getAccountbookId() {
         return accountbookId;
     }
@@ -35,8 +45,7 @@ public class AccountbookAccountEntity {
         this.accountbookId = accountbookId;
     }
 
-    @Basic
-    @Column(name = "account_id")
+
     public String getAccountId() {
         return accountId;
     }
@@ -45,8 +54,7 @@ public class AccountbookAccountEntity {
         this.accountId = accountId;
     }
 
-    @Basic
-    @Column(name = "deleted")
+
     public Integer getDeleted() {
         return deleted;
     }
@@ -59,7 +67,7 @@ public class AccountbookAccountEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccountbookAccountEntity that = (AccountbookAccountEntity) o;
+        AccountbookAccount that = (AccountbookAccount) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(accountbookId, that.accountbookId) &&
                 Objects.equals(accountId, that.accountId) &&

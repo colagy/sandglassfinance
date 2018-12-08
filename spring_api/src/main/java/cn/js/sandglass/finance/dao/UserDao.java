@@ -1,12 +1,10 @@
 package cn.js.sandglass.finance.dao;
 
-import cn.js.sandglass.finance.entitiy.UserEntity;
+import cn.js.sandglass.finance.entitiy.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+public interface UserDao extends JpaRepository<User, Long> {
 
-public interface UserDao extends JpaRepository<UserEntity, Long> {
-
-    public List<UserEntity> findById(String id);
+    public User findById(String id);
 
 }

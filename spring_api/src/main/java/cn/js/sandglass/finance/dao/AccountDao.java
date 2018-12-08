@@ -1,7 +1,7 @@
 package cn.js.sandglass.finance.dao;
 
-import cn.js.sandglass.finance.entitiy.AccountEntity;
+import cn.js.sandglass.finance.entitiy.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AccountDao extends JpaRepository<AccountEntity, Long> {
+public interface AccountDao extends JpaRepository<Account, Long> {
 }

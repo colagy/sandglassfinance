@@ -1,7 +1,7 @@
 package cn.js.sandglass.finance.controller;
 
-import cn.js.sandglass.finance.entitiy.AccountEntity;
-import cn.js.sandglass.finance.entitiy.AccountbookAccountEntity;
+import cn.js.sandglass.finance.entitiy.Account;
+import cn.js.sandglass.finance.entitiy.AccountbookAccount;
 import cn.js.sandglass.finance.service.AccountService;
 import cn.js.sandglass.finance.valid.AccountCreateValid;
 import io.swagger.annotations.Api;
@@ -19,19 +19,19 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping(value = "/account")
-    public AccountEntity create(@Valid @RequestBody AccountCreateValid accountCreateValid) {
-        var accountEntity = new AccountEntity();
+    public Account create(@Valid @RequestBody AccountCreateValid accountCreateValid) {
+        var accountEntity = new Account();
         accountEntity.setAccountTypeId(accountCreateValid.getAccountTypeId());
         accountEntity.setBalance(accountCreateValid.getBalance());
         accountEntity.setMark(accountCreateValid.getMark());
 
-        var accountbookAccountEntity = new AccountbookAccountEntity();
+        var accountbookAccountEntity = new AccountbookAccount();
         accountbookAccountEntity.setAccountbookId(accountCreateValid.getAccountbookId());
         return accountService.create(accountbookAccountEntity, accountEntity);
     }
 
     @GetMapping(value = "/account")
-    public List<AccountEntity> get(@RequestParam(value = "accountbook_id", required = true) String accountbookId) {
+    public List<Account> get(@RequestParam(value = "accountbook_id", required = true) String accountbookId) {
         return accountService.get(accountbookId);
     }
 

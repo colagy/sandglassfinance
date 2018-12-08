@@ -1,8 +1,8 @@
 package cn.js.sandglass.finance.controller;
 
 import cn.js.sandglass.finance.util.TimeUtil;
-import cn.js.sandglass.finance.entitiy.AccountRevenueEntity;
-import cn.js.sandglass.finance.entitiy.RevenueEntity;
+import cn.js.sandglass.finance.entitiy.AccountRevenue;
+import cn.js.sandglass.finance.entitiy.Revenue;
 import cn.js.sandglass.finance.service.RevenueService;
 import cn.js.sandglass.finance.service.RevenueTypeService;
 import cn.js.sandglass.finance.valid.RevenueCreateValid;
@@ -47,17 +47,17 @@ public class RevenueController {
 
     @PostMapping(value = "/revenue")
     public Object create(@Valid @RequestBody RevenueCreateValid revenueCreateValid) {
-        RevenueEntity revenueEntity = new RevenueEntity();
-        revenueEntity.setAmount(revenueCreateValid.getAmount());
-        revenueEntity.setDefaultRevenueType(revenueCreateValid.getDefaultRevenueType());
-        revenueEntity.setRevenueTypeId(revenueCreateValid.getRevenueTypeId());
-        revenueEntity.setTime(revenueCreateValid.getTime());
-        revenueEntity.setMark(revenueCreateValid.getMark());
+        Revenue revenue = new Revenue();
+        revenue.setAmount(revenueCreateValid.getAmount());
+        revenue.setDefaultRevenueType(revenueCreateValid.getDefaultRevenueType());
+        revenue.setRevenueTypeId(revenueCreateValid.getRevenueTypeId());
+        revenue.setTime(revenueCreateValid.getTime());
+        revenue.setMark(revenueCreateValid.getMark());
 
-        AccountRevenueEntity accountRevenueEntity = new AccountRevenueEntity();
-        accountRevenueEntity.setAccountId(revenueCreateValid.getAccountId());
+        AccountRevenue accountRevenue = new AccountRevenue();
+        accountRevenue.setAccountId(revenueCreateValid.getAccountId());
 
-        return revenueService.create(accountRevenueEntity, revenueEntity);
+        return revenueService.create(accountRevenue, revenue);
     }
 
     /**

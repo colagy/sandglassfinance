@@ -1,7 +1,7 @@
 package cn.js.sandglass.finance.dao;
 
-import cn.js.sandglass.finance.entitiy.FixedExpenditureEntity;
+import cn.js.sandglass.finance.entitiy.FixedExpenditure;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FixedExpenditureDao extends JpaRepository<FixedExpenditureEntity,String> {
+public interface FixedExpenditureDao extends JpaRepository<FixedExpenditure,String> {
 }

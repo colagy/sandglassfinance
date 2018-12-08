@@ -2,8 +2,8 @@ package cn.js.sandglass.finance.service;
 
 import cn.js.sandglass.finance.dao.AccountFixedExpenditureDao;
 import cn.js.sandglass.finance.dao.FixedExpenditureDao;
-import cn.js.sandglass.finance.entitiy.AccountFixedExpenditureEntity;
-import cn.js.sandglass.finance.entitiy.FixedExpenditureEntity;
+import cn.js.sandglass.finance.entitiy.AccountFixedExpenditure;
+import cn.js.sandglass.finance.entitiy.FixedExpenditure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,31 +19,31 @@ public class FixedExpenditureService {
     @Autowired
     AccountFixedExpenditureDao accountFixedExpenditureDao;
 
-    public FixedExpenditureEntity create(AccountFixedExpenditureEntity accountFixedExpenditureEntity, FixedExpenditureEntity fixedExpenditureEntity){
-        FixedExpenditureEntity saveRes=save(fixedExpenditureEntity);
+    public FixedExpenditure create(AccountFixedExpenditure accountFixedExpenditure, FixedExpenditure fixedExpenditure){
+        FixedExpenditure saveRes=save(fixedExpenditure);
 
-        accountFixedExpenditureEntity.setFixedExpenditureId(saveRes.getId());
-        accountFixedExpenditureDao.save(accountFixedExpenditureEntity);
+        accountFixedExpenditure.setFixedExpenditureId(saveRes.getId());
+        accountFixedExpenditureDao.save(accountFixedExpenditure);
         return saveRes;
     }
 
-    public FixedExpenditureEntity save(FixedExpenditureEntity fixedExpenditureEntity){
-        return fixedExpenditureDao.save(fixedExpenditureEntity);
+    public FixedExpenditure save(FixedExpenditure fixedExpenditure){
+        return fixedExpenditureDao.save(fixedExpenditure);
     }
 
-    public List<FixedExpenditureEntity> get(){
+    public List<FixedExpenditure> get(){
         return find();
     }
 
-    public List<FixedExpenditureEntity> find(){
+    public List<FixedExpenditure> find(){
         return fixedExpenditureDao.findAll();
     }
 
-    public Optional<FixedExpenditureEntity> getOne(String id){
+    public Optional<FixedExpenditure> getOne(String id){
         return findById(id);
     }
 
-    public Optional<FixedExpenditureEntity> findById(String id){
+    public Optional<FixedExpenditure> findById(String id){
         return fixedExpenditureDao.findById(id);
     }
 

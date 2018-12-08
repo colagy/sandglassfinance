@@ -1,12 +1,12 @@
 package cn.js.sandglass.finance.dao;
 
-import cn.js.sandglass.finance.entitiy.UserWechatEntity;
+import cn.js.sandglass.finance.entitiy.UserWechat;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserWechatDao extends JpaRepository<UserWechatEntity, Long> {
+public interface UserWechatDao extends JpaRepository<UserWechat, Long> {
 
-    public List<UserWechatEntity> findByUnionid(String unionid);
+    public UserWechat findByUnionid(String unionid);
 
 }

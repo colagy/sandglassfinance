@@ -6,18 +6,31 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "account_fixed_expenditure", schema = "sandglassfinance", catalog = "")
-public class AccountFixedExpenditureEntity {
-    private String id;
-    private String accountId;
-    private String fixedExpenditureId;
-    private String mark = "";
-    private Integer deleted = 0;
+@Table(name = "account_fixed_revenue", schema = "sandglassfinance", catalog = "")
+public class AccountFixedRevenue {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "account_id", nullable = false)
+    private String accountId;
+
+    @Basic
+    @Column(name = "fixed_revenue_id", nullable = false)
+    private String fixedRevenueId;
+
+    @Basic
+    @Column(name = "mark")
+    private String mark = "";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted = 0;
+
     public String getId() {
         return id;
     }
@@ -26,8 +39,6 @@ public class AccountFixedExpenditureEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "account_id", nullable = false)
     public String getAccountId() {
         return accountId;
     }
@@ -36,18 +47,14 @@ public class AccountFixedExpenditureEntity {
         this.accountId = accountId;
     }
 
-    @Basic
-    @Column(name = "fixed_expenditure_id", nullable = false)
-    public String getFixedExpenditureId() {
-        return fixedExpenditureId;
+    public String getFixedRevenueId() {
+        return fixedRevenueId;
     }
 
-    public void setFixedExpenditureId(String fixedExpenditureId) {
-        this.fixedExpenditureId = fixedExpenditureId;
+    public void setFixedRevenueId(String fixedRevenueId) {
+        this.fixedRevenueId = fixedRevenueId;
     }
 
-    @Basic
-    @Column(name = "mark")
     public String getMark() {
         return mark;
     }
@@ -56,8 +63,6 @@ public class AccountFixedExpenditureEntity {
         this.mark = mark;
     }
 
-    @Basic
-    @Column(name = "deleted")
     public Integer getDeleted() {
         return deleted;
     }
@@ -70,10 +75,10 @@ public class AccountFixedExpenditureEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccountFixedExpenditureEntity that = (AccountFixedExpenditureEntity) o;
+        AccountFixedRevenue that = (AccountFixedRevenue) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(accountId, that.accountId) &&
-                Objects.equals(fixedExpenditureId, that.fixedExpenditureId) &&
+                Objects.equals(fixedRevenueId, that.fixedRevenueId) &&
                 Objects.equals(mark, that.mark) &&
                 Objects.equals(deleted, that.deleted);
     }
@@ -81,6 +86,6 @@ public class AccountFixedExpenditureEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, accountId, fixedExpenditureId, mark, deleted);
+        return Objects.hash(id, accountId, fixedRevenueId, mark, deleted);
     }
 }

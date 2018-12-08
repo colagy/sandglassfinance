@@ -7,17 +7,30 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user_wechat", schema = "sandglassfinance", catalog = "")
-public class UserWechatEntity {
-    private String id;
-    private String uid;
-    private String unionid;
-    private String openid = "";
-    private Integer deleted = 0;
+public class UserWechat {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "uid",nullable = false,unique = true)
+    private String uid;
+
+    @Basic
+    @Column(name = "unionid", nullable = false, unique = true)
+    private String unionid;
+
+    @Basic
+    @Column(name = "openid")
+    private String openid = "";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted = 0;
+
     public String getId() {
         return id;
     }
@@ -26,8 +39,6 @@ public class UserWechatEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "uid",nullable = false,unique = true)
     public String getUid() {
         return uid;
     }
@@ -36,8 +47,6 @@ public class UserWechatEntity {
         this.uid = uid;
     }
 
-    @Basic
-    @Column(name = "unionid", nullable = false, unique = true)
     public String getUnionid() {
         return unionid;
     }
@@ -46,8 +55,6 @@ public class UserWechatEntity {
         this.unionid = unionid;
     }
 
-    @Basic
-    @Column(name = "openid")
     public String getOpenid() {
         return openid;
     }
@@ -56,8 +63,6 @@ public class UserWechatEntity {
         this.openid = openid;
     }
 
-    @Basic
-    @Column(name = "deleted")
     public Integer getDeleted() {
         return deleted;
     }
@@ -70,7 +75,7 @@ public class UserWechatEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserWechatEntity that = (UserWechatEntity) o;
+        UserWechat that = (UserWechat) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(unionid, that.unionid) &&
                 Objects.equals(openid, that.openid) &&

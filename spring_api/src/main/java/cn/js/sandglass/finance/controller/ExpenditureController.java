@@ -1,8 +1,8 @@
 package cn.js.sandglass.finance.controller;
 
 import cn.js.sandglass.finance.util.TimeUtil;
-import cn.js.sandglass.finance.entitiy.AccountExpenditureEntity;
-import cn.js.sandglass.finance.entitiy.ExpenditureEntity;
+import cn.js.sandglass.finance.entitiy.AccountExpenditure;
+import cn.js.sandglass.finance.entitiy.Expenditure;
 import cn.js.sandglass.finance.service.ExpenditureService;
 import cn.js.sandglass.finance.valid.ExpenditureCreateValid;
 import io.swagger.annotations.Api;
@@ -20,17 +20,17 @@ public class ExpenditureController {
 
     @PostMapping(value = "/expenditure")
     public Object create(@Valid @RequestBody ExpenditureCreateValid expenditureCreateValid) {
-        ExpenditureEntity expenditureEntity = new ExpenditureEntity();
-        expenditureEntity.setDefaultExpenditureType(expenditureCreateValid.getDefaultExpenditureType());
-        expenditureEntity.setExpenditureTypeId(expenditureCreateValid.getExpenditureTypeId());
-        expenditureEntity.setAmount(expenditureCreateValid.getAmount());
-        expenditureEntity.setTime(expenditureCreateValid.getTime());
-        expenditureEntity.setMark(expenditureCreateValid.getMark());
+        Expenditure expenditure = new Expenditure();
+        expenditure.setDefaultExpenditureType(expenditureCreateValid.getDefaultExpenditureType());
+        expenditure.setExpenditureTypeId(expenditureCreateValid.getExpenditureTypeId());
+        expenditure.setAmount(expenditureCreateValid.getAmount());
+        expenditure.setTime(expenditureCreateValid.getTime());
+        expenditure.setMark(expenditureCreateValid.getMark());
 
-        AccountExpenditureEntity accountExpenditureEntity = new AccountExpenditureEntity();
-        accountExpenditureEntity.setAccountId(expenditureCreateValid.getAccountId());
+        AccountExpenditure accountExpenditure = new AccountExpenditure();
+        accountExpenditure.setAccountId(expenditureCreateValid.getAccountId());
 
-        return expenditureService.create(accountExpenditureEntity, expenditureEntity);
+        return expenditureService.create(accountExpenditure, expenditure);
     }
 
     @GetMapping(value = "/expenditure")

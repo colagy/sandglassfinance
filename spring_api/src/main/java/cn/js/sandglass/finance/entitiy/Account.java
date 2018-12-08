@@ -1,5 +1,6 @@
 package cn.js.sandglass.finance.entitiy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -7,17 +8,37 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "account", schema = "sandglassfinance", catalog = "")
-public class AccountEntity {
-    private String id;
-    private String accountTypeId;
-    private Double balance;
-    private String mark = "";
-    private Integer deleted = 0;
+public class Account {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "account_type_id",nullable = false)
+    private String accountTypeId;
+
+    @Basic
+    @Column(name = "balance",nullable = false, precision = 17, scale = 2)
+    private Double balance;
+
+    @Basic
+    @Column(name = "mark")
+    private String mark = "";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted = 0;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(joinColumns = @JoinColumn(name = "accountbook_id"),
+            inverseJoinColumns = @JoinColumn(name = "account_id"))
+    private Accountbook accountbook;
+
+
     public String getId() {
         return id;
     }
@@ -26,8 +47,7 @@ public class AccountEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "account_type_id",nullable = false)
+
     public String getAccountTypeId() {
         return accountTypeId;
     }
@@ -36,8 +56,7 @@ public class AccountEntity {
         this.accountTypeId = accountTypeId;
     }
 
-    @Basic
-    @Column(name = "balance",nullable = false, precision = 17, scale = 2)
+
     public Double getBalance() {
         return balance;
     }
@@ -46,8 +65,7 @@ public class AccountEntity {
         this.balance = balance;
     }
 
-    @Basic
-    @Column(name = "mark")
+
     public String getMark() {
         return mark;
     }
@@ -56,8 +74,7 @@ public class AccountEntity {
         this.mark = mark;
     }
 
-    @Basic
-    @Column(name = "deleted")
+
     public Integer getDeleted() {
         return deleted;
     }
@@ -70,7 +87,7 @@ public class AccountEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccountEntity that = (AccountEntity) o;
+        Account that = (Account) o;
         return accountTypeId == that.accountTypeId &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(balance, that.balance) &&

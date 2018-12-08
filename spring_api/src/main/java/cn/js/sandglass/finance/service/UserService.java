@@ -1,11 +1,9 @@
 package cn.js.sandglass.finance.service;
 
 import cn.js.sandglass.finance.dao.UserDao;
-import cn.js.sandglass.finance.entitiy.UserEntity;
+import cn.js.sandglass.finance.entitiy.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserService {
@@ -13,11 +11,11 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public UserEntity create(UserEntity userEntity) {
-        return userDao.save(userEntity);
+    public User create(User user) {
+        return userDao.save(user);
     }
 
-    public List<UserEntity> getById(String id) {
+    public User getById(String id) {
         return userDao.findById(id);
     }
 

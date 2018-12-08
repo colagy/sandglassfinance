@@ -1,7 +1,7 @@
 package cn.js.sandglass.finance.controller;
 
-import cn.js.sandglass.finance.entitiy.AccountFixedRevenueEntity;
-import cn.js.sandglass.finance.entitiy.FixedRevenueEntity;
+import cn.js.sandglass.finance.entitiy.AccountFixedRevenue;
+import cn.js.sandglass.finance.entitiy.FixedRevenue;
 import cn.js.sandglass.finance.service.FixedRevenueService;
 import cn.js.sandglass.finance.valid.FixedRevenueCreateValid;
 import io.swagger.annotations.Api;
@@ -19,22 +19,22 @@ public class FixedRevenueController {
 
     @PostMapping(value = "fixed.revenue")
     public Object create(@Valid @RequestBody FixedRevenueCreateValid fixedRevenueCreateValid) {
-        FixedRevenueEntity fixedRevenueEntity = new FixedRevenueEntity();
-        fixedRevenueEntity.setDefaultRevenueType(fixedRevenueCreateValid.getDefaultRevenueType());
-        fixedRevenueEntity.setRevenueTypeId(fixedRevenueCreateValid.getRevenueTypeId());
-        fixedRevenueEntity.setTimeUnit(fixedRevenueCreateValid.getTimeUnit());
-        fixedRevenueEntity.setStartTime(fixedRevenueCreateValid.getStartTime());
-        fixedRevenueEntity.setEndTime(fixedRevenueCreateValid.getEndTime());
-        fixedRevenueEntity.setAmount(fixedRevenueCreateValid.getAmount());
-        fixedRevenueEntity.setDay(fixedRevenueCreateValid.getDay());
-        fixedRevenueEntity.setMonth(fixedRevenueCreateValid.getMonth());
-        fixedRevenueEntity.setWeek(fixedRevenueCreateValid.getWeek());
-        fixedRevenueEntity.setMark(fixedRevenueCreateValid.getMark());
+        FixedRevenue fixedRevenue = new FixedRevenue();
+        fixedRevenue.setDefaultRevenueType(fixedRevenueCreateValid.getDefaultRevenueType());
+        fixedRevenue.setRevenueTypeId(fixedRevenueCreateValid.getRevenueTypeId());
+        fixedRevenue.setTimeUnit(fixedRevenueCreateValid.getTimeUnit());
+        fixedRevenue.setStartTime(fixedRevenueCreateValid.getStartTime());
+        fixedRevenue.setEndTime(fixedRevenueCreateValid.getEndTime());
+        fixedRevenue.setAmount(fixedRevenueCreateValid.getAmount());
+        fixedRevenue.setDay(fixedRevenueCreateValid.getDay());
+        fixedRevenue.setMonth(fixedRevenueCreateValid.getMonth());
+        fixedRevenue.setWeek(fixedRevenueCreateValid.getWeek());
+        fixedRevenue.setMark(fixedRevenueCreateValid.getMark());
 
-        AccountFixedRevenueEntity accountFixedRevenueEntity = new AccountFixedRevenueEntity();
-        accountFixedRevenueEntity.setAccountId(fixedRevenueCreateValid.getAccountId());
+        AccountFixedRevenue accountFixedRevenue = new AccountFixedRevenue();
+        accountFixedRevenue.setAccountId(fixedRevenueCreateValid.getAccountId());
 
-        return fixedRevenueService.create(accountFixedRevenueEntity, fixedRevenueEntity);
+        return fixedRevenueService.create(accountFixedRevenue, fixedRevenue);
     }
 
     @GetMapping(value = "fixed.revenue")

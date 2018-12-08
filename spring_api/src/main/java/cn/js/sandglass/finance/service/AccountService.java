@@ -2,8 +2,8 @@ package cn.js.sandglass.finance.service;
 
 import cn.js.sandglass.finance.dao.AccountDao;
 import cn.js.sandglass.finance.dao.AccountbookAccountDao;
-import cn.js.sandglass.finance.entitiy.AccountEntity;
-import cn.js.sandglass.finance.entitiy.AccountbookAccountEntity;
+import cn.js.sandglass.finance.entitiy.Account;
+import cn.js.sandglass.finance.entitiy.AccountbookAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,24 +26,24 @@ public class AccountService {
     private AccountbookAccountService accountbookAccountService;
 
     @Transactional
-    public AccountEntity create(AccountbookAccountEntity accountbookAccountEntity, AccountEntity accountEntity) {
+    public Account create(AccountbookAccount accountbookAccount, Account account) {
         // 创建账户
-        AccountEntity accountRes = save(accountEntity);
+        Account accountRes = save(account);
 
         // 创建账本与账户关系
-        accountbookAccountEntity.setAccountId(accountRes.getId());
-        System.out.println(accountbookAccountEntity.getAccountId());
-        accountbookAccountDao.save(accountbookAccountEntity);
+        accountbookAccount.setAccountId(accountRes.getId());
+        System.out.println(accountbookAccount.getAccountId());
+        accountbookAccountDao.save(accountbookAccount);
 
         return accountRes;
     }
 
-    public AccountEntity save(AccountEntity accountEntity) {
-        AccountEntity accountRes = accountDao.save(accountEntity);
+    public Account save(Account account) {
+        Account accountRes = accountDao.save(account);
         return accountRes;
     }
 
-    public List<AccountEntity> get(String accountbookId) {
+    public List<Account> get(String accountbookId) {
 
         return accountDao.findAll();
     }

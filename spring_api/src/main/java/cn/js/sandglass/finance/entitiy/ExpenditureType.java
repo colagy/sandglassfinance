@@ -6,18 +6,32 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user_accountbook", schema = "sandglassfinance", catalog = "")
-public class UserAccountbookEntity {
-    private String id;
-    private String userId;
-    private String accountbookId;
-    private String mark="";
-    private Integer deleted=0;
+@Table(name = "expenditure_type", schema = "sandglassfinance", catalog = "")
+public class ExpenditureType {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id",length = 36)
     @GenericGenerator(name="idGenerator", strategy="uuid")
     @GeneratedValue(generator="idGenerator")
+    private String id;
+
+    @Basic
+    @Column(name = "type",nullable = false)
+    private String type;
+
+    @Basic
+    @Column(name = "name",nullable = false)
+    private String name;
+
+    @Basic
+    @Column(name = "mark")
+    private String mark="";
+
+    @Basic
+    @Column(name = "deleted")
+    private Integer deleted=0;
+
+
     public String getId() {
         return id;
     }
@@ -26,28 +40,22 @@ public class UserAccountbookEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "user_id",nullable = false)
-    public String getUserId() {
-        return userId;
+    public String getType() {
+        return type;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    @Basic
-    @Column(name = "accountbookId",nullable = false)
     public String getName() {
-        return accountbookId;
+        return name;
     }
 
-    public void setName(String accountbookId) {
-        this.accountbookId = accountbookId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Basic
-    @Column(name = "mark")
     public String getMark() {
         return mark;
     }
@@ -56,8 +64,6 @@ public class UserAccountbookEntity {
         this.mark = mark;
     }
 
-    @Basic
-    @Column(name = "deleted")
     public Integer getDeleted() {
         return deleted;
     }
@@ -70,10 +76,10 @@ public class UserAccountbookEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserAccountbookEntity that = (UserAccountbookEntity) o;
+        ExpenditureType that = (ExpenditureType) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(userId, that.userId) &&
-                Objects.equals(accountbookId, that.accountbookId) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(name, that.name) &&
                 Objects.equals(mark, that.mark) &&
                 Objects.equals(deleted, that.deleted);
     }
@@ -81,6 +87,6 @@ public class UserAccountbookEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, userId, accountbookId, mark, deleted);
+        return Objects.hash(id, type, name, mark, deleted);
     }
 }
