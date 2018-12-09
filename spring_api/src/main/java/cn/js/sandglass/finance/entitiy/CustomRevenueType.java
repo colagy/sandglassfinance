@@ -1,5 +1,6 @@
 package cn.js.sandglass.finance.entitiy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class CustomRevenueType {
     @Column(name = "mark")
     private String mark="";
 
+    @JsonIgnore
     @Basic
     @Column(name = "deleted")
     private Integer deleted=0;
@@ -70,9 +72,4 @@ public class CustomRevenueType {
                 Objects.equals(deleted, that.deleted);
     }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id,  name, mark, deleted);
-    }
 }

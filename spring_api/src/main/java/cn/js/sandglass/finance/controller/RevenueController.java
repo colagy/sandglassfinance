@@ -1,7 +1,8 @@
 package cn.js.sandglass.finance.controller;
 
+import cn.js.sandglass.finance.entitiy.Account;
+import cn.js.sandglass.finance.service.AccountService;
 import cn.js.sandglass.finance.util.TimeUtil;
-import cn.js.sandglass.finance.entitiy.AccountRevenue;
 import cn.js.sandglass.finance.entitiy.Revenue;
 import cn.js.sandglass.finance.service.RevenueService;
 import cn.js.sandglass.finance.service.RevenueTypeService;
@@ -21,6 +22,9 @@ public class RevenueController {
 
     @Autowired
     private RevenueTypeService revenueTypeService;
+
+    @Autowired
+    private AccountService accountService;
 
     /**
      * @api {post} /revenue 添加收入
@@ -54,10 +58,9 @@ public class RevenueController {
         revenue.setTime(revenueCreateValid.getTime());
         revenue.setMark(revenueCreateValid.getMark());
 
-        AccountRevenue accountRevenue = new AccountRevenue();
-        accountRevenue.setAccountId(revenueCreateValid.getAccountId());
+        Account account=accountService.get(revenueCreateValid.getAccountId());
 
-        return revenueService.create(accountRevenue, revenue);
+        return revenueService.create(account, revenue);
     }
 
     /**

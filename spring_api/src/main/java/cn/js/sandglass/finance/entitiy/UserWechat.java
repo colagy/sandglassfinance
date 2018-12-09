@@ -1,5 +1,6 @@
 package cn.js.sandglass.finance.entitiy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class UserWechat {
     @Column(name = "openid")
     private String openid = "";
 
+    @JsonIgnore
     @Basic
     @Column(name = "deleted")
     private Integer deleted = 0;
@@ -69,22 +71,6 @@ public class UserWechat {
 
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserWechat that = (UserWechat) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(unionid, that.unionid) &&
-                Objects.equals(openid, that.openid) &&
-                Objects.equals(deleted, that.deleted);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, unionid, openid, deleted);
     }
 
 

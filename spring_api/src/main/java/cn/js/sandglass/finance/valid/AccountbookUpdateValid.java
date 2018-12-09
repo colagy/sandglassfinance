@@ -7,7 +7,6 @@ public class AccountbookUpdateValid {
     private String id;
     private String name;
     private String mark;
-    private Integer deleted;
 
     public String getId() {
         return id;
@@ -31,13 +30,5 @@ public class AccountbookUpdateValid {
 
     public void setMark(String mark) {
         this.mark = mark;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
     }
 }

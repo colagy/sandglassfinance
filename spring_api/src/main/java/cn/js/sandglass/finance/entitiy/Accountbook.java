@@ -1,11 +1,11 @@
 package cn.js.sandglass.finance.entitiy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "accountbook", schema = "sandglassfinance", catalog = "")
@@ -25,13 +25,14 @@ public class Accountbook {
     @Column(name = "mark")
     private String mark = "";
 
+    @JsonIgnore
     @Basic
     @Column(name = "deleted")
     private Integer deleted = 0;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "accountbook",fetch = FetchType.EAGER)
-    private List<Account> accounts;
+    @OneToMany(mappedBy = "accountbook")
+    private List<Account> accounts=new ArrayList<>();
 
     public String getId() {
         return id;
@@ -66,6 +67,14 @@ public class Accountbook {
 
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 
     @Override

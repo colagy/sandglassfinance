@@ -1,7 +1,8 @@
 package cn.js.sandglass.finance.controller;
 
-import cn.js.sandglass.finance.entitiy.AccountFixedRevenue;
+import cn.js.sandglass.finance.entitiy.Account;
 import cn.js.sandglass.finance.entitiy.FixedRevenue;
+import cn.js.sandglass.finance.service.AccountService;
 import cn.js.sandglass.finance.service.FixedRevenueService;
 import cn.js.sandglass.finance.valid.FixedRevenueCreateValid;
 import io.swagger.annotations.Api;
@@ -17,6 +18,9 @@ public class FixedRevenueController {
     @Autowired
     FixedRevenueService fixedRevenueService;
 
+    @Autowired
+    AccountService accountService;
+
     @PostMapping(value = "fixed.revenue")
     public Object create(@Valid @RequestBody FixedRevenueCreateValid fixedRevenueCreateValid) {
         FixedRevenue fixedRevenue = new FixedRevenue();
@@ -31,10 +35,9 @@ public class FixedRevenueController {
         fixedRevenue.setWeek(fixedRevenueCreateValid.getWeek());
         fixedRevenue.setMark(fixedRevenueCreateValid.getMark());
 
-        AccountFixedRevenue accountFixedRevenue = new AccountFixedRevenue();
-        accountFixedRevenue.setAccountId(fixedRevenueCreateValid.getAccountId());
+        Account account=accountService.get(fixedRevenueCreateValid.getAccountId());
 
-        return fixedRevenueService.create(accountFixedRevenue, fixedRevenue);
+        return fixedRevenueService.create(account, fixedRevenue);
     }
 
     @GetMapping(value = "fixed.revenue")

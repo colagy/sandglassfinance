@@ -1,8 +1,7 @@
 package cn.js.sandglass.finance.service;
 
-import cn.js.sandglass.finance.dao.AccountExpenditureDao;
 import cn.js.sandglass.finance.dao.ExpenditureDao;
-import cn.js.sandglass.finance.entitiy.AccountExpenditure;
+import cn.js.sandglass.finance.entitiy.Account;
 import cn.js.sandglass.finance.entitiy.Expenditure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,15 +15,10 @@ public class ExpenditureService {
     @Autowired
     ExpenditureDao expenditureDao;
 
-    @Autowired
-    AccountExpenditureDao accountExpenditureDao;
-
     @Transactional
-    public Expenditure create(AccountExpenditure accountExpenditure, Expenditure expenditure){
-        Expenditure saveRes= save(expenditure);
+    public Expenditure create(Account account, Expenditure expenditure){
 
-        accountExpenditure.setExpenditureId(saveRes.getId());
-        accountExpenditureDao.save(accountExpenditure);
+        Expenditure saveRes= save(expenditure);
         return saveRes;
     }
 

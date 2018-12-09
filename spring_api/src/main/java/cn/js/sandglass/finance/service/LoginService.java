@@ -3,9 +3,6 @@ package cn.js.sandglass.finance.service;
 import cn.js.sandglass.finance.entitiy.UserDev;
 import cn.js.sandglass.finance.entitiy.User;
 import cn.js.sandglass.finance.entitiy.UserWechat;
-import cn.js.sandglass.finance.util.response.RetErr;
-import cn.js.sandglass.finance.util.response.RetResponse;
-import cn.js.sandglass.finance.util.response.RetResult;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -77,7 +74,7 @@ public class LoginService {
         return wechatUserRes;
     }
 
-    public RetResult<Object> devLogin(UserDev userDev) {
+    public Object devLogin(UserDev userDev) throws Exception {
         String username = userDev.getUsername();
         // 加密密码
         String pwSha1 = DigestUtils.sha1Hex(username + userDev.getPassword() + SALT);
@@ -88,9 +85,9 @@ public class LoginService {
         if (!StringUtils.isEmpty(userDevRes)) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("uid",userDevRes.getUid());
-            return RetResponse.ok(jsonObject);
+            return jsonObject;
         }else {
-            return RetResponse.err(RetErr.ERR);
+            throw new Exception("用户不存在");
         }
     }
 

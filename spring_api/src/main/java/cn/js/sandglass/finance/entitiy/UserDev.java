@@ -29,6 +29,7 @@ public class UserDev {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @JsonIgnore
     @Basic
     @Column(name = "deleted")
     private Integer deleted = 0;
@@ -82,22 +83,5 @@ public class UserDev {
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserDev that = (UserDev) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(username, that.username) &&
-                Objects.equals(password, that.password) &&
-                Objects.equals(deleted, that.deleted);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, password, deleted);
-    }
-
 
 }

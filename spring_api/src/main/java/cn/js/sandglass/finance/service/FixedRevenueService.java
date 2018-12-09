@@ -1,8 +1,7 @@
 package cn.js.sandglass.finance.service;
 
-import cn.js.sandglass.finance.dao.AccountFixedRevenueDao;
 import cn.js.sandglass.finance.dao.FixedRevenueDao;
-import cn.js.sandglass.finance.entitiy.AccountFixedRevenue;
+import cn.js.sandglass.finance.entitiy.Account;
 import cn.js.sandglass.finance.entitiy.FixedRevenue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +15,9 @@ public class FixedRevenueService {
     @Autowired
     FixedRevenueDao fixedRevenueDao;
 
-    @Autowired
-    AccountFixedRevenueDao accountFixedRevenueDao;
+    public FixedRevenue create(Account account, FixedRevenue fixedRevenue){
 
-    public FixedRevenue create(AccountFixedRevenue accountFixedRevenue, FixedRevenue fixedRevenue){
         FixedRevenue saveRes=save(fixedRevenue);
-
-        accountFixedRevenue.setFixedRevenueId(saveRes.getId());
-        accountFixedRevenueDao.save(accountFixedRevenue);
         return saveRes;
     }
 

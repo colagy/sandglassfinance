@@ -20,41 +20,37 @@ public class AccountbookController {
     @Autowired
     private AccountbookService accountbookService;
 
-    @ApiImplicitParam(name = "accountbookCreateValid",defaultValue = "{name:'566545'}")
     @PostMapping(value = "/accountbook")
     public RetResult<Accountbook> create(@Valid @RequestBody AccountbookCreateValid accountbookCreateValid) {
-        var accountbookEntity=new Accountbook();
-        accountbookEntity.setName(accountbookCreateValid.getName());
-        return RetResponse.ok(accountbookService.create(accountbookEntity));
+        var accountbook = new Accountbook();
+        accountbook.setName(accountbookCreateValid.getName());
+        return RetResponse.ok(accountbookService.create(accountbook));
     }
 
     @GetMapping(value = "/accountbook.list")
     public RetResult<List<Accountbook>> get() {
-        return RetResponse.ok(accountbookService.get());
+        return RetResponse.ok(accountbookService.list());
     }
 
     @GetMapping(value = "/accountbook")
-    public Accountbook getOne(@RequestParam(value = "id",required = true) String id){
-        return accountbookService.getOne(id);
+    public RetResult<Accountbook> getOne(@RequestParam(value = "id", required = true) String id) {
+        return RetResponse.ok(accountbookService.get(id));
     }
 
     @PutMapping(value = "/accountbook")
-    public Accountbook update(@Valid @RequestBody AccountbookUpdateValid accountbookUpdateValid){
-        Accountbook accountbookEntity=new Accountbook();
-        accountbookEntity.setId(accountbookUpdateValid.getId());
-        accountbookEntity.setName(accountbookUpdateValid.getName());
-        accountbookEntity.setMark(accountbookUpdateValid.getMark());
-        return accountbookService.update(accountbookEntity);
+    public RetResult<Accountbook> update(@Valid @RequestBody AccountbookUpdateValid accountbookUpdateValid) {
+        Accountbook accountbook = new Accountbook();
+        accountbook.setId(accountbookUpdateValid.getId());
+        accountbook.setName(accountbookUpdateValid.getName());
+        accountbook.setMark(accountbookUpdateValid.getMark());
+        return RetResponse.ok(accountbookService.update(accountbook));
     }
 
     @DeleteMapping(value = "/accountbook")
-    public JSONObject delete(@Valid @RequestBody AccountbookDeleteValid accountbookDeleteValid){
-        Accountbook accountbookEntity=new Accountbook();
-        accountbookService.delete(accountbookEntity);
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("msg","delete ok");
-        jsonObject.put("status",201);
-        return jsonObject;
+    public RetResult delete(@Valid @RequestBody AccountbookDeleteValid accountbookDeleteValid) {
+        Accountbook accountbook = new Accountbook();
+        accountbookService.delete(accountbook);
+        return RetResponse.ok();
     }
 
 }

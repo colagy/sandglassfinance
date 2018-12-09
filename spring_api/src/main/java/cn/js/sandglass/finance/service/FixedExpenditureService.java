@@ -1,8 +1,7 @@
 package cn.js.sandglass.finance.service;
 
-import cn.js.sandglass.finance.dao.AccountFixedExpenditureDao;
 import cn.js.sandglass.finance.dao.FixedExpenditureDao;
-import cn.js.sandglass.finance.entitiy.AccountFixedExpenditure;
+import cn.js.sandglass.finance.entitiy.Account;
 import cn.js.sandglass.finance.entitiy.FixedExpenditure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +15,8 @@ public class FixedExpenditureService {
     @Autowired
     FixedExpenditureDao fixedExpenditureDao;
 
-    @Autowired
-    AccountFixedExpenditureDao accountFixedExpenditureDao;
-
-    public FixedExpenditure create(AccountFixedExpenditure accountFixedExpenditure, FixedExpenditure fixedExpenditure){
+    public FixedExpenditure create(Account account, FixedExpenditure fixedExpenditure){
         FixedExpenditure saveRes=save(fixedExpenditure);
-
-        accountFixedExpenditure.setFixedExpenditureId(saveRes.getId());
-        accountFixedExpenditureDao.save(accountFixedExpenditure);
         return saveRes;
     }
 
@@ -39,13 +32,12 @@ public class FixedExpenditureService {
         return fixedExpenditureDao.findAll();
     }
 
-    public Optional<FixedExpenditure> getOne(String id){
+    public FixedExpenditure getOne(String id){
         return findById(id);
     }
 
-    public Optional<FixedExpenditure> findById(String id){
+    public FixedExpenditure findById(String id){
         return fixedExpenditureDao.findById(id);
     }
-
 
 }

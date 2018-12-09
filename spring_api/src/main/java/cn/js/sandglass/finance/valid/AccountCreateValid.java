@@ -4,7 +4,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class AccountCreateValid {
-    private String id;
     @NotNull
     private String  accountbookId;
     @NotNull
@@ -13,15 +12,6 @@ public class AccountCreateValid {
     @Min(value = 0)
     private Double balance = 0.00;
     private String mark = "";
-    private Integer deleted = 0;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getAccountbookId() {
         return accountbookId;
@@ -53,13 +43,5 @@ public class AccountCreateValid {
 
     public void setMark(String mark) {
         this.mark = mark;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
     }
 }

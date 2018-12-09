@@ -1,8 +1,13 @@
 package cn.js.sandglass.finance.controller;
 
 import cn.js.sandglass.finance.entitiy.Account;
-import cn.js.sandglass.finance.entitiy.AccountbookAccount;
+import cn.js.sandglass.finance.entitiy.AccountType;
+import cn.js.sandglass.finance.entitiy.Accountbook;
 import cn.js.sandglass.finance.service.AccountService;
+import cn.js.sandglass.finance.service.AccountTypeService;
+import cn.js.sandglass.finance.service.AccountbookService;
+import cn.js.sandglass.finance.util.response.RetResponse;
+import cn.js.sandglass.finance.util.response.RetResult;
 import cn.js.sandglass.finance.valid.AccountCreateValid;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +23,31 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping(value = "/account")
-    public Account create(@Valid @RequestBody AccountCreateValid accountCreateValid) {
-        var accountEntity = new Account();
-        accountEntity.setAccountTypeId(accountCreateValid.getAccountTypeId());
-        accountEntity.setBalance(accountCreateValid.getBalance());
-        accountEntity.setMark(accountCreateValid.getMark());
+    @Autowired
+    private AccountbookService accountbookService;
 
-        var accountbookAccountEntity = new AccountbookAccount();
-        accountbookAccountEntity.setAccountbookId(accountCreateValid.getAccountbookId());
-        return accountService.create(accountbookAccountEntity, accountEntity);
+    @Autowired
+    private AccountTypeService accountTypeService;
+
+    @PostMapping(value = "/account")
+    public RetResult<Account> create(@Valid @RequestBody AccountCreateValid accountCreateValid) {
+        AccountType accountType=accountTypeService.get(accountCreateValid.getAccountTypeId());
+        Accountbook accountbook=accountbookService.get(accountCreateValid.getAccountbookId());
+
+        Account account = new Account();
+        account.setBalance(accountCreateValid.getBalance());
+        account.setMark(accountCreateValid.getMark());
+
+        account.setAccountbook(accountbook);
+        account.setAccountType(accountType);
+
+        return RetResponse.ok(accountService.create(account));
     }
 
-    @GetMapping(value = "/account")
-    public List<Account> get(@RequestParam(value = "accountbook_id", required = true) String accountbookId) {
-        return accountService.get(accountbookId);
+    @GetMapping(value = "/account.list")
+    public RetResult<List<Account>> get(@RequestParam(value = "accountbook_id", required = true) String accountbookId) {
+        Accountbook accountbook=accountbookService.get(accountbookId);
+        return RetResponse.ok(accountbook.getAccounts());
     }
 
     /**

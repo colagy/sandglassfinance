@@ -1,14 +1,18 @@
 package cn.js.sandglass.finance.controller;
 
-import cn.js.sandglass.finance.entitiy.AccountFixedExpenditure;
+import cn.js.sandglass.finance.entitiy.Account;
 import cn.js.sandglass.finance.entitiy.FixedExpenditure;
+import cn.js.sandglass.finance.service.AccountService;
 import cn.js.sandglass.finance.service.FixedExpenditureService;
+import cn.js.sandglass.finance.util.response.RetResponse;
+import cn.js.sandglass.finance.util.response.RetResult;
 import cn.js.sandglass.finance.valid.FixedExpenditureCreateValid;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Api(tags = "固定支出")
 @RestController
@@ -17,8 +21,11 @@ public class FixedExpenditureController {
     @Autowired
     FixedExpenditureService fixedExpenditureService;
 
+    @Autowired
+    AccountService accountService;
+
     @PostMapping(value = "fixed.expenditure")
-    public Object create(@Valid @RequestBody FixedExpenditureCreateValid fixedExpenditureCreateValid) {
+    public RetResult<FixedExpenditure> create(@Valid @RequestBody FixedExpenditureCreateValid fixedExpenditureCreateValid) {
         FixedExpenditure fixedExpenditure = new FixedExpenditure();
         fixedExpenditure.setDefaultExpenditureType(fixedExpenditureCreateValid.getDefaultExpenditureType());
         fixedExpenditure.setExpenditureTypeId(fixedExpenditureCreateValid.getExpenditureTypeId());
@@ -31,20 +38,19 @@ public class FixedExpenditureController {
         fixedExpenditure.setWeek(fixedExpenditureCreateValid.getWeek());
         fixedExpenditure.setMark(fixedExpenditureCreateValid.getMark());
 
-        AccountFixedExpenditure accountFixedExpenditure = new AccountFixedExpenditure();
-        accountFixedExpenditure.setAccountId(fixedExpenditureCreateValid.getAccountId());
+        Account account=accountService.get(fixedExpenditureCreateValid.getAccountId());
 
-        return fixedExpenditureService.create(accountFixedExpenditure, fixedExpenditure);
+        return RetResponse.ok(fixedExpenditureService.create(account, fixedExpenditure));
+    }
+
+    @GetMapping(value = "fixed.expenditure.list")
+    public RetResult<List<FixedExpenditure>> list() {
+        return RetResponse.ok(fixedExpenditureService.get());
     }
 
     @GetMapping(value = "fixed.expenditure")
-    public Object get() {
-        return fixedExpenditureService.get();
-    }
-
-    @GetMapping(value = "fixed.expenditure.one")
-    public Object getOne(@RequestParam(value = "fixedExpenditureId") String id) {
-        return fixedExpenditureService.getOne(id);
+    public RetResult<FixedExpenditure> getOne(@RequestParam(value = "fixedExpenditureId") String id) {
+        return RetResponse.ok(fixedExpenditureService.getOne(id));
     }
 
 }

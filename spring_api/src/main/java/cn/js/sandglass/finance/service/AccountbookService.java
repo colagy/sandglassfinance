@@ -1,6 +1,7 @@
 package cn.js.sandglass.finance.service;
 
 import cn.js.sandglass.finance.dao.AccountbookDao;
+import cn.js.sandglass.finance.entitiy.Account;
 import cn.js.sandglass.finance.entitiy.Accountbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,19 +22,19 @@ public class AccountbookService {
         return save(accountbookEntity);
     }
 
-    public Accountbook save(Accountbook accountbookEntity){
+    public Accountbook save(Accountbook accountbookEntity) {
         return accountbookDao.save(accountbookEntity);
     }
 
-    public List<Accountbook> get() {
+    public List<Accountbook> list() {
         return accountbookDao.findAll();
     }
 
-    public Accountbook getOne(String id) {
+    public Accountbook get(String id) {
         return accountbookDao.findById(id);
     }
 
-    public void delete(Accountbook accountbookEntity){
+    public void delete(Accountbook accountbookEntity) {
         accountbookDao.delete(accountbookEntity);
 
     }

@@ -1,5 +1,6 @@
 package cn.js.sandglass.finance.entitiy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class RevenueType {
     @Column(name = "mark")
     private String mark="";
 
+    @JsonIgnore
     @Basic
     @Column(name = "deleted")
     private Integer deleted=0;
@@ -71,21 +73,4 @@ public class RevenueType {
         this.deleted = deleted;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RevenueType that = (RevenueType) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(type, that.type) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(mark, that.mark) &&
-                Objects.equals(deleted, that.deleted);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, type, name, mark, deleted);
-    }
 }

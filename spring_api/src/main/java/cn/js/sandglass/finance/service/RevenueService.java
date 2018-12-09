@@ -1,8 +1,7 @@
 package cn.js.sandglass.finance.service;
 
-import cn.js.sandglass.finance.dao.AccountRevenueDao;
 import cn.js.sandglass.finance.dao.RevenueDao;
-import cn.js.sandglass.finance.entitiy.AccountRevenue;
+import cn.js.sandglass.finance.entitiy.Account;
 import cn.js.sandglass.finance.entitiy.Revenue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,17 +13,11 @@ import java.util.List;
 public class RevenueService {
 
     @Autowired
-    private AccountRevenueDao accountRevenueDao;
-
-    @Autowired
     private RevenueDao revenueDao;
 
     @Transactional
-    public Revenue create(AccountRevenue accountRevenue, Revenue revenue) {
+    public Revenue create(Account account, Revenue revenue) {
         Revenue saveRes = save(revenue);
-
-        accountRevenue.setRevenueId(saveRes.getId());
-        accountRevenueDao.save(accountRevenue);
 
         return saveRes;
     }

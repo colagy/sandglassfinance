@@ -22,6 +22,10 @@ public class RetResponse {
         return new RetResult<T>().setCode(retErr.code).setMsg(retErr.msg).setData((T) new JSONObject());
     }
 
+    public static <T> RetResult<T> err(){
+        return err(RetErr.ERR);
+    }
+
     public static <T> RetResult<T> res(int code, String msg) {
         return new RetResult<T>().setCode(code).setMsg(msg).setData((T) new JSONObject());
     }

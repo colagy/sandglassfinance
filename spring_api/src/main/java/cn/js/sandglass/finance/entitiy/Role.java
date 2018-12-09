@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "role", schema = "sandglassfinance", catalog = "")
@@ -26,6 +28,7 @@ public class Role {
     @Column(name = "role", nullable = false)
     private String role; // wechat, dev, admin
 
+    @JsonIgnore
     @Basic
     @Column(name = "deleted")
     private Integer deleted = 0;
@@ -66,19 +69,12 @@ public class Role {
         this.deleted = deleted;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Role role1 = (Role) o;
-        return Objects.equals(id, role1.id) &&
-                Objects.equals(name, role1.name) &&
-                Objects.equals(role, role1.role) &&
-                Objects.equals(deleted, role1.deleted);
+    public List<User> getUsers() {
+        return users;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, role, deleted);
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
+
 }

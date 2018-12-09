@@ -21,7 +21,6 @@ public class FixedRevenueCreateValid {
     @NotNull
     private long amount;
     private String mark = "";
-    private Integer deleted = 0;
 
     private String accountId;
 
@@ -119,13 +118,5 @@ public class FixedRevenueCreateValid {
 
     public void setMark(String mark) {
         this.mark = mark;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
     }
 }

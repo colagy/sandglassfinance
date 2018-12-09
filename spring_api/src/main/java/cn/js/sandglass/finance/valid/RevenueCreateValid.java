@@ -14,7 +14,6 @@ public class RevenueCreateValid {
     @NotNull
     private Double amount;
     private String mark="";
-    private Integer deleted=0;
 
     @NotNull
     private String accountId;
@@ -73,13 +72,5 @@ public class RevenueCreateValid {
 
     public void setMark(String mark) {
         this.mark = mark;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
     }
 }
