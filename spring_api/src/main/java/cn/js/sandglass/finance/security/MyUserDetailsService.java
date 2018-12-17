@@ -44,10 +44,12 @@ public class MyUserDetailsService implements UserDetailsService {
             case "dev":
                 UserDev userDev = userDevDao.findByUsername(username);
                 user = userDao.findById(userDev.getUid());
+                user.setUsername(username);
                 break;
             case "wechat":
                 UserWechat userWechat = userWechatDao.findByUnionid(username);
                 user = userDao.findById(userWechat.getUid());
+                user.setUsername(username);
                 break;
             default:
                 throw new UsernameNotFoundException(String.format("用户类型不正确 type='%s'.", type));

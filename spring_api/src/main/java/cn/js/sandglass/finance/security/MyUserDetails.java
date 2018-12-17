@@ -8,19 +8,20 @@ import java.util.Collection;
 
 public class MyUserDetails implements UserDetails {
 
-    private String username = "";
-    private String password = "";
+    private String password;
 
     // 用户id
     private final String uid;
     // 用户类型
     private final String type;
+    private final String username;
     //角色集合
     private final Collection<? extends GrantedAuthority> authorities;
 
-    MyUserDetails(String uid, String type, Collection<? extends GrantedAuthority> authorities) {
+    MyUserDetails(String uid, String type, String username, Collection<? extends GrantedAuthority> authorities) {
         this.uid = uid;
         this.type = type;
+        this.username = username;
         this.authorities = authorities;
     }
 

@@ -34,6 +34,9 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<Role> roles;
 
+    @JsonIgnore
+    private String username; // 兼容用户校验
+
     public User() {
     }
 
@@ -72,5 +75,13 @@ public class User implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

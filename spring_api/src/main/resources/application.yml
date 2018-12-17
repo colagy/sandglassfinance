@@ -49,3 +49,8 @@ swagger2: # api文档
   enable: true
 user: # 用户密码加密
   salt: sandglassfinance_password_SALT_+++++++++++---------------------- # 盐
+jwt: # jwt 加密
+  secret: 57c20f826b6ca6999fd24fbe758eb5ba0af6e911 # sandglassfinance_jwt
+  expiration: 604800
+  header: Authorization
+  tokenHead: token_head

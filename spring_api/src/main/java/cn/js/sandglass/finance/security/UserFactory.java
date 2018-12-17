@@ -17,6 +17,7 @@ final class UserFactory {
         return new MyUserDetails(
                 user.getId(),
                 user.getType(),
+                user.getUsername(),
                 mapToGrantedAuthorities(user.getRoles().stream().map(Role::getName).collect(Collectors.toList())));
     }
 

@@ -2,11 +2,13 @@ package cn.js.sandglass.finance.entitiy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "account", schema = "sandglassfinance", catalog = "")
 public class Account {
@@ -39,53 +41,4 @@ public class Account {
     @JoinColumn(name = "account_type_id")
     private AccountType accountType;
 
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
-
-    public String getMark() {
-        return mark;
-    }
-
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
-
-    public Accountbook getAccountbook() {
-        return accountbook;
-    }
-
-    public void setAccountbook(Accountbook accountbook) {
-        this.accountbook = accountbook;
-    }
-
-    public AccountType getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
-    }
 }
