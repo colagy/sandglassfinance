@@ -34,7 +34,6 @@ public class RedisConfig extends CachingConfigurerSupport {
      */
     private static final Logger lg = LoggerFactory.getLogger(RedisConfig.class);
 
-
     @Autowired
     private JedisConnectionFactory jedisConnectionFactory;
 

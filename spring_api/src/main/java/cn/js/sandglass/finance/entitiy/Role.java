@@ -1,6 +1,7 @@
 package cn.js.sandglass.finance.entitiy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,24 +10,32 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "role", schema = "sandglassfinance", catalog = "")
 public class Role {
 
+    public static enum Name {
+        WECHAT("WECHAT"),
+        DEV("DEV"),
+        ADMIN("ADMIN");
+        public String name;
+
+        Name(String name) {
+            this.name = name;
+        }
+    }
 
     @Id
-    @Column(name = "id",length = 36)
+    @Column(name = "id", length = 36)
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
     private String id;
 
     @Basic
+    @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false)
-    private String name;
-
-    @Basic
-    @Column(name = "role", nullable = false)
-    private String role; // wechat, dev, admin
+    private Name name;
 
     @JsonIgnore
     @Basic
@@ -34,47 +43,10 @@ public class Role {
     private Integer deleted = 0;
 
     @JsonIgnore
-    @ManyToMany(mappedBy="roles")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private List<User> users;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
-        return name;
+        return name.name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
 }

@@ -1,12 +1,14 @@
 package cn.js.sandglass.finance.entitiy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "fixed_expenditure", schema = "sandglassfinance", catalog = "")
 public class FixedExpenditure {
@@ -61,101 +63,5 @@ public class FixedExpenditure {
     @Basic
     @Column(name = "deleted")
     private Integer deleted = 0;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public long getDefaultExpenditureType() {
-        return defaultExpenditureType;
-    }
-
-    public void setDefaultExpenditureType(long defaultFixedExpenditureType) {
-        this.defaultExpenditureType = defaultFixedExpenditureType;
-    }
-
-    public String getExpenditureTypeId() {
-        return expenditureTypeId;
-    }
-
-    public void setExpenditureTypeId(String expenditureTypeId) {
-        this.expenditureTypeId = expenditureTypeId;
-    }
-
-    public String getTimeUnit() {
-        return timeUnit;
-    }
-
-    public void setTimeUnit(String timeUnit) {
-        this.timeUnit = timeUnit;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public String getWeek() {
-        return week;
-    }
-
-    public void setWeek(String week) {
-        this.week = week;
-    }
-
-    public Timestamp getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Timestamp startTime) {
-        this.startTime = startTime;
-    }
-
-    public Timestamp getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Timestamp endTime) {
-        this.endTime = endTime;
-    }
-
-    public long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(long amount) {
-        this.amount = amount;
-    }
-
-    public String getMark() {
-        return mark;
-    }
-
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
 
 }

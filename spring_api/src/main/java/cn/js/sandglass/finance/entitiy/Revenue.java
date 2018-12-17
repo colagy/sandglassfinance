@@ -1,12 +1,14 @@
 package cn.js.sandglass.finance.entitiy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "revenue", schema = "sandglassfinance", catalog = "")
 public class Revenue {
@@ -41,61 +43,5 @@ public class Revenue {
     @Basic
     @Column(name = "deleted")
     private Integer deleted=0;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public long getDefaultRevenueType() {
-        return defaultRevenueType;
-    }
-
-    public void setDefaultRevenueType(long defaultRevenueType) {
-        this.defaultRevenueType = defaultRevenueType;
-    }
-
-    public String getRevenueTypeId() {
-        return revenueTypeId;
-    }
-
-    public void setRevenueTypeId(String revenueTypeId) {
-        this.revenueTypeId = revenueTypeId;
-    }
-
-    public Timestamp getTime() {
-        return time;
-    }
-
-    public void setTime(Timestamp time) {
-        this.time = time;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public String getMark() {
-        return mark;
-    }
-
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
 
 }

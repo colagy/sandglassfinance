@@ -1,17 +1,16 @@
 package cn.js.sandglass.finance.entitiy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Objects;
 
 @Data
 @Entity
-@Table(name = "accountbook", schema = "sandglassfinance", catalog = "")
-public class Accountbook {
+@Table(name = "wechat", schema = "sandglassfinance", catalog = "")
+public class Wechat {
 
     @Id
     @Column(name = "id", length = 36)
@@ -20,19 +19,20 @@ public class Accountbook {
     private String id;
 
     @Basic
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "unionid", nullable = false, unique = true)
+    private String unionid;
 
     @Basic
-    @Column(name = "mark")
-    private String mark = "";
+    @Column(name = "openid")
+    private String openid = "";
 
     @JsonIgnore
     @Basic
     @Column(name = "deleted")
     private Integer deleted = 0;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "accountbook")
-    private List<Account> accounts = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private User user;
+
 }

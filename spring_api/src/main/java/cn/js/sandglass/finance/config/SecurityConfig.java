@@ -1,6 +1,6 @@
 package cn.js.sandglass.finance.config;
 
-import cn.js.sandglass.finance.security.MyUserDetailsService;
+import cn.js.sandglass.finance.security.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,15 +24,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // Spring会自动寻找实现接口的类注入,会找到我们的 UserDetailsServiceImpl  类
     @Autowired
-    private MyUserDetailsService userDetailsService;
+    private JwtUserDetailsService userDetailsService;
 
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
                 // 设置UserDetailsService
-                .userDetailsService(this.userDetailsService);
-//                // 使用BCrypt进行密码的hash
-//                .passwordEncoder(passwordEncoder());
+                .userDetailsService(this.userDetailsService)
+                // 使用BCrypt进行密码的hash
+                .passwordEncoder(passwordEncoder());
     }
 
     // 装载BCrypt密码编码器
@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/error"
                 ).permitAll()
                 // 对于获取token的rest api要允许匿名访问
-                .antMatchers("/login").permitAll()
+                .antMatchers("/login*").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
         // 禁用缓存

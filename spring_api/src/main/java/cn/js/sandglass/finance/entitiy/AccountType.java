@@ -1,11 +1,13 @@
 package cn.js.sandglass.finance.entitiy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.*;
 
+@Data
 @Entity
 @Table(name = "account_type", schema = "sandglassfinance", catalog = "")
 public class AccountType {
@@ -40,54 +42,5 @@ public class AccountType {
     @JsonIgnore
     @OneToMany(mappedBy = "accountType")
     private List<Account> accounts=new ArrayList<>();
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Integer getClassify() {
-        return classify;
-    }
-
-    public void setClassify(Integer classify) {
-        this.classify = classify;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMark() {
-        return mark;
-    }
-
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
 
 }
