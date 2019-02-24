@@ -17,13 +17,16 @@ public class AccountService {
 
     @Transactional
     public Account create( Account account) {
-        // 添加账户
         return save(account);
     }
 
     public Account save(Account account) {
         Account accountRes = accountDao.save(account);
         return accountRes;
+    }
+
+    public Account update(Account account){
+        return save(account);
     }
 
     public Account get(String id){
